@@ -12,6 +12,7 @@ public class Stagiaire {
 	private int codePostal;
 	private String promotion;
 	private String date;
+	private boolean contratPro;
 	
 	/**
 	 * Constructeur de la classe Stagiaire
@@ -20,14 +21,16 @@ public class Stagiaire {
 	 * @param codePostal code postal du stagiaire
 	 * @param promotion promotion du stagiaire
 	 * @param date date de la formation du stagiaire
+	 * @param contratPro Renseigne si l'utilisateur est en contrat pro ou pas
 	 */
-	public Stagiaire(String nom, String prenom, int codePostal, String promotion, String date) {
+	public Stagiaire(String nom, String prenom, int codePostal, String promotion, String date, boolean contratPro) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.codePostal = codePostal;
 		this.promotion = promotion;
 		this.date = date;
+		this.contratPro = contratPro;
 	}
 
 	public String getNom() {
@@ -68,6 +71,14 @@ public class Stagiaire {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public boolean isContratPro() {
+		return contratPro;
+	}
+
+	public void setContratPro(boolean contratPro) {
+		this.contratPro = contratPro;
 	}
 	
 	
