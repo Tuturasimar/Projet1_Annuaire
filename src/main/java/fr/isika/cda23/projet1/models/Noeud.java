@@ -55,19 +55,23 @@ public class Noeud {
 	}
 
 	public void parcoursInfixe() {
-		if (this.filsGauche != null) {
-			this.filsGauche.parcoursInfixe();
-		}
-		System.out.println(this.cle.getNom() + " " + this.cle.getPrenom());
-		if (this.filsDroit != null) {
-			this.filsDroit.parcoursInfixe();
+		if (this != null) {
+			if (this.filsGauche != null) {
+				this.filsGauche.parcoursInfixe();
+			}
+			if (this.cle != null) {
+				System.out.println(this.cle.getNom() + " " + this.cle.getPrenom());
+			}
+
+			if (this.filsDroit != null) {
+				this.filsDroit.parcoursInfixe();
+			}
 		}
 	}
 
 	public void rechercheSupprimer(String nom) {
 		if (this.cle.getNom().compareTo(nom) == 0) {
 			supprimerNoeud(this);
-			
 		} else if (this.cle.getNom().compareTo(nom) > 0) {
 			if (this.filsGauche != null) {
 				filsGauche.rechercheSupprimer(nom);
@@ -75,36 +79,37 @@ public class Noeud {
 				System.out.println("Element introuvable");
 			}
 		} else {
-			if(this.filsDroit != null) {
+			if (this.filsDroit != null) {
 				filsDroit.rechercheSupprimer(nom);
 			} else {
 				System.out.println("Element introuvable");
 			}
 		}
+
 	}
-	
+
 	public Noeud chercherSuccesseur(Noeud noeud) {
 		Noeud noeudCourant = noeud.filsDroit;
-		
-		while(noeudCourant.filsGauche != null) {
+
+		while (noeudCourant.filsGauche != null) {
 			noeudCourant = noeudCourant.filsGauche;
 		}
 		return noeudCourant;
 	}
 
-	public Noeud supprimerNoeud(Noeud noeud) {
+	public void supprimerNoeud(Noeud noeud) {
 		if (noeud.filsGauche == null && noeud.filsDroit == null) {
-			return null;
+			this.cle = null;
 		} else if (noeud.filsGauche != null && noeud.filsDroit != null) {
-
 			this.cle = chercherSuccesseur(noeud).cle;
 			this.filsDroit.rechercheSupprimer(this.cle.getNom());
-			return this;
 		} else {
 			if (noeud.filsGauche != null) {
-				return noeud.filsGauche;
+				this.cle = noeud.filsGauche.cle;
+				this.filsGauche = null;
 			} else {
-				return noeud.filsDroit;
+				this.cle = noeud.filsDroit.cle;
+				this.filsDroit = null;
 			}
 		}
 

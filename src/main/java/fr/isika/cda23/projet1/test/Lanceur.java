@@ -16,13 +16,19 @@ public class Lanceur {
 		racine.ajouterFils("Monark", "Elsa", 55, "AOE", "2010");
 		racine.ajouterFils("Nanty", "Isabelle", 78, "AOE", "2017");
 		racine.ajouterFils("Zangbar", "Will", 93, "AOE", "2016");
+		racine.ajouterFils("Ouioui", "Sandy", 63, "AOE", "2007");
+		racine.ajouterFils("Lawrence", "Damian", 20, "AOE", "2007");
+		racine.ajouterFils("Mutin", "Sadam", 92, "AOE", "2010");
+		racine.ajouterFils("Baobab", "Elsa", 55, "AOE", "2010");
+		racine.ajouterFils("Bob", "Isabelle", 78, "AOE", "2017");
+		racine.ajouterFils("Aazimar", "Will", 93, "AOE", "2016");
 		
 		racine.parcoursInfixe();
+		System.out.println("--------------");
 		
-		racine.rechercheSupprimer("Artum");
+		racine.rechercheSupprimer("Kyle");
+		racine.rechercheSupprimer("Nanty");
 		
-		System.out.println("--------------------------");
-
 		racine.parcoursInfixe();
 	}
 
