@@ -73,5 +73,13 @@ public class Stagiaire {
 		this.date = date;
 	}
 
+	@Override
+	public String toString() {
+		return "Stagiaire [nom=" + nom + ", prenom=" + prenom + ", codePostal=" + codePostal + ", promotion="
+				+ promotion + ", date=" + date + "]";
+	}
+	
+	
+
 	
 }
