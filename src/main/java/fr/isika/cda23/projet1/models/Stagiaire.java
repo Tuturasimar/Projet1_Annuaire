@@ -9,7 +9,7 @@ public class Stagiaire {
 
 	private String nom;
 	private String prenom;
-	private int codePostal;
+	private String codePostal;
 	private String promotion;
 	private String date;
 	
@@ -23,7 +23,7 @@ public class Stagiaire {
 	 * @param date date de la formation du stagiaire
 	 * @param contratPro Renseigne si l'utilisateur est en contrat pro ou pas
 	 */
-	public Stagiaire(String nom, String prenom, int codePostal, String promotion, String date) {
+	public Stagiaire(String nom, String prenom, String codePostal, String promotion, String date) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -49,11 +49,11 @@ public class Stagiaire {
 		this.prenom = prenom;
 	}
 
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 

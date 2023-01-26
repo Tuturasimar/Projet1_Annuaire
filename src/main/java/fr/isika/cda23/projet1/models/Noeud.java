@@ -36,7 +36,7 @@ public class Noeud {
 		filsDroit = null;
 	}
 
-	public void ajouterFils(String nom, String prenom, int codePostal, String promotion, String date) {
+	public void ajouterFils(String nom, String prenom, String codePostal, String promotion, String date) {
 		if (cle.getNom().compareTo(nom) > 0) {
 			if (filsGauche == null) {
 				filsGauche = new Noeud(new Stagiaire(nom, prenom, codePostal, promotion, date));
