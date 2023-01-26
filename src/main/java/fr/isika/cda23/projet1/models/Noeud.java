@@ -60,7 +60,7 @@ public class Noeud {
 				this.filsGauche.parcoursInfixe();
 			}
 			if (this.cle != null) {
-				System.out.println(this.cle.getNom() + " " + this.cle.getPrenom());
+				System.out.println(this.cle);
 			}
 
 			if (this.filsDroit != null) {
