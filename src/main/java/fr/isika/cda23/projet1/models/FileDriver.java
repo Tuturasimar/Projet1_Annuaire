@@ -24,15 +24,18 @@ public class FileDriver {
 
 			// extraction des données
 			while ((ligne = bufferedReader.readLine()) != null) {
+				// si la ligne lue est différente de *, on récupère chaque ligne lue et on l'ajoute à la liste
 				if (ligne.compareTo("*") != 0) {
 					dataStagiaire = ligne.split("\n");
 					stagiaireList.add(dataStagiaire[0]);
 				} else {
+					// Si la ligne lue est le marqueur qui différencie les stagiaires
+					// On crée un nouveau stagiaire, puis on l'ajoute
 					String[] dataNewStagiaire = stagiaireList.toArray(String[]::new);
-					Noeud nouveauStagiaire = new Noeud(new Stagiaire(dataNewStagiaire[0], dataNewStagiaire[1], dataNewStagiaire[2], dataNewStagiaire[3], dataNewStagiaire[4]));
+					Noeud nouveauStagiaire = new Noeud(new Stagiaire(dataNewStagiaire[0].toUpperCase(), dataNewStagiaire[1], dataNewStagiaire[2], dataNewStagiaire[3], dataNewStagiaire[4]));
 					nouveauStagiaire.ajouterNoeud(nouveauStagiaire.getCle().getNom(),0);
-					
-//							racine.ajouterFils(dataNewStagiaire[0], dataNewStagiaire[1], dataNewStagiaire[2], dataNewStagiaire[3], dataNewStagiaire[4]);
+					// Une fois le stagiaire ajouté, on supprime le contenu de la liste
+					// On recommence tant qu'il n'y a plus rien à lire sur le fichier
 					stagiaireList.clear();
 				}
 			}

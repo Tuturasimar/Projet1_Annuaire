@@ -9,39 +9,20 @@ public class Lanceur {
 
 	public static void main(String[] args) {
 
-//		FichierBinaire.creationFichier();
-//		FileDriver.readTextFile();
+		// Si le fichier binaire n'existe pas encore ou n'est pas rempli
+		if (FichierBinaire.lastIndex() == 0) {
+			// On créé le fichier pour initialiser la racine
+			FichierBinaire.creationFichier();
+			// On récupère l'ensemble des données du fichier texte pour les écrire dans le fichier BIN
+			FileDriver.readTextFile();
+		}
 		
-		FichierBinaire.lireFichier(0);
-
-		//FichierBinaire.ecritureFichier(new Noeud(new Stagiaire("Blake", "Sandy", "63", "AOE", "2007")));
+		Noeud racine = FichierBinaire.lireNoeud(0);
+		racine.parcoursInfixe(0);
+		
 		System.out.println(FichierBinaire.lastIndex());
+
 		
-
-		// racine.parcoursInfixe();
-
-//		Noeud racine = new Noeud(new Stagiaire("Kyle", "Stephan", 75, "AOE", "2007"));
-//
-//		racine.ajouterFils("Blake", "Sandy", 63, "AOE", "2007");
-//		racine.ajouterFils("Vanz", "Damian", 20, "AOE", "2007");
-//		racine.ajouterFils("Artum", "Sadam", 92, "AOE", "2010");
-//		racine.ajouterFils("Monark", "Elsa", 55, "AOE", "2010");
-//		racine.ajouterFils("Nanty", "Isabelle", 78, "AOE", "2017");
-//		racine.ajouterFils("Zangbar", "Will", 93, "AOE", "2016");
-//		racine.ajouterFils("Ouioui", "Sandy", 63, "AOE", "2007");
-//		racine.ajouterFils("Lawrence", "Damian", 20, "AOE", "2007");
-//		racine.ajouterFils("Mutin", "Sadam", 92, "AOE", "2010");
-//		racine.ajouterFils("Baobab", "Elsa", 55, "AOE", "2010");
-//		racine.ajouterFils("Bob", "Isabelle", 78, "AOE", "2017");
-//		racine.ajouterFils("Aazimar", "Will", 93, "AOE", "2016");
-//		
-//		racine.parcoursInfixe();
-//		System.out.println("--------------");
-//		
-//		//racine.rechercheSupprimer("Kyle");
-//		racine.rechercheSupprimer("Nanty");
-//		
-//		racine.parcoursInfixe();
 	}
 
 }

@@ -9,6 +9,7 @@ package fr.isika.cda23.projet1.models;
  */
 public class Stagiaire {
 
+	
 	private String nom;
 	private String prenom;
 	private String codePostal;
@@ -31,7 +32,6 @@ public class Stagiaire {
 	 * @param codePostal code postal du stagiaire
 	 * @param promotion  promotion du stagiaire
 	 * @param date       date de la formation du stagiaire
-	 * @param contratPro Renseigne si l'utilisateur est en contrat pro ou pas
 	 */
 	public Stagiaire(String nom, String prenom, String codePostal, String promotion, String date) {
 		super();
@@ -39,6 +39,7 @@ public class Stagiaire {
 		this.prenom = prenom;
 		this.codePostal = codePostal;
 		this.promotion = promotion;
+		// Certaines dates n'étant pas renseignées, on remplace le vide par des X qui prendront la même taille dans le fichier
 		if (date.equals("")) {
 			this.date = "XXXX";
 		} else {
@@ -47,6 +48,10 @@ public class Stagiaire {
 
 	}
 
+	/**
+	 * méthode qui permet de rajouter des espaces à un nom pour atteindre la taille maximum imposé dans le fichier binaire
+	 * @return une String de 21 caractères.
+	 */
 	public String nomLong() {
 		String nomLong = "";
 
@@ -69,6 +74,10 @@ public class Stagiaire {
 		this.nom = nom;
 	}
 
+	/**
+	 * méthode qui permet de rajouter des espaces à un prénom pour atteindre la taille maximum imposé dans le fichier binaire
+	 * @return une String de 20 caractères
+	 */
 	public String prenomLong() {
 		String prenomLong = "";
 
@@ -91,6 +100,10 @@ public class Stagiaire {
 		this.prenom = prenom;
 	}
 
+	/**
+	 * méthode qui permet de rajouter des espaces à un numéro de département pour atteindre la taille maximum imposé dans le fichier binaire
+	 * @return une String de 3 caractères
+	 */
 	public String codePostalLong() {
 		String codePostalLong = "";
 
@@ -113,6 +126,10 @@ public class Stagiaire {
 		this.codePostal = codePostal;
 	}
 
+	/**
+	 * méthode qui permet de rajouter des espaces à un label de promotion pour atteindre la taille maximum imposé dans le fichier binaire
+	 * @return une String de 11 caractères
+	 */
 	public String promotionLong() {
 		String promotionLong = "";
 
