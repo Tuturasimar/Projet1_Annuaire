@@ -20,9 +20,10 @@ public class Stagiaire {
 	public final static int TAILLE_PRENOM_MAX = 20;
 	public final static int TAILLE_PROMO_MAX = 11;
 	public final static int TAILLE_CODE_POSTAL_MAX = 3;
-	public final static int TAILLE_NOEUD_MAX = 126;
+	public final static int TAILLE_NOEUD_MAX = 130;
 	public final static int INDEX_ACCES_FILS_GAUCHE = 118;
 	public final static int INDEX_ACCES_FILS_DROIT = 122;
+	public final static int INDEX_SUITE_LISTE_CHAINEE = 126;
 
 	/**
 	 * Constructeur de la classe Stagiaire

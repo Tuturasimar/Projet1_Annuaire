@@ -33,7 +33,7 @@ public class FileDriver {
 					// On crée un nouveau stagiaire, puis on l'ajoute
 					String[] dataNewStagiaire = stagiaireList.toArray(String[]::new);
 					Noeud nouveauStagiaire = new Noeud(new Stagiaire(dataNewStagiaire[0].toUpperCase(), dataNewStagiaire[1], dataNewStagiaire[2], dataNewStagiaire[3], dataNewStagiaire[4]));
-					nouveauStagiaire.ajouterNoeud(nouveauStagiaire.getCle().getNom(),0);
+					nouveauStagiaire.ajouterNoeud(nouveauStagiaire,0);
 					// Une fois le stagiaire ajouté, on supprime le contenu de la liste
 					// On recommence tant qu'il n'y a plus rien à lire sur le fichier
 					stagiaireList.clear();
