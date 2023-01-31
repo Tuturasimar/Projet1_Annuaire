@@ -135,7 +135,7 @@ public class Noeud {
 	 * 
 	 * @param index index actuel de la recherche (au début du parcours : 0)
 	 */
-	public void parcoursInfixe(int index) {
+	public void parcoursInfixe(int index, ListeStagiaires liste) {
 		if (this != null) {
 
 			// Si un fils gauche existe pour ce noeud
@@ -143,23 +143,24 @@ public class Noeud {
 				// On va récupérer les données du fils gauche
 				Noeud filsGauche = FichierBinaire.lireNoeud(this.filsGauche);
 				// Récursivité en envoyant comme index celui du fils gauche
-				filsGauche.parcoursInfixe(this.filsGauche);
+				filsGauche.parcoursInfixe(this.filsGauche, liste);
 			}
 			if (this.nextDoublon != -1) {
 				Noeud nextDoublon = FichierBinaire.lireNoeud(this.nextDoublon);
-				nextDoublon.parcoursInfixe(this.nextDoublon);
+				nextDoublon.parcoursInfixe(this.nextDoublon, liste);
 			}
 			if (this.cle != null) {
 				// Affiche suite à la récursivité l'ensemble des stagiaires par ordre
 				// alphabétique
-				System.out.println(this.cle);
+				liste.ajouterStagiaire(this.cle);
+				
 			}
 			// Si un fils droit existe pour ce noeud
 			if (this.filsDroit != -1) {
 				// On récupère les données du fils droit
 				Noeud filsDroit = FichierBinaire.lireNoeud(this.filsDroit);
 				// Appel récursif en envoyant l'index du fils droit
-				filsDroit.parcoursInfixe(this.filsDroit);
+				filsDroit.parcoursInfixe(this.filsDroit, liste);
 			}
 		}
 	}

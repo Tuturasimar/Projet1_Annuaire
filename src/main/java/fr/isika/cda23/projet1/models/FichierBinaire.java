@@ -108,9 +108,9 @@ public class FichierBinaire {
 			stagiaire.setFilsDroit(filsDroitBin);
 			stagiaire.setNextDoublon(nextDoublonBin);
 
-			System.out.println(index + " || nom : " + nomBin + " || prénom : " + prenomBin + " || cp : "
-					+ codePostalBin + " || promotion : " + promotionBin + " || date : " + dateBin + " || FG : "
-					+ filsGaucheBin + " || FD : " + filsDroitBin + " || LC : " + nextDoublonBin);
+//			System.out.println(index + " || nom : " + nomBin + " || prénom : " + prenomBin + " || cp : "
+//					+ codePostalBin + " || promotion : " + promotionBin + " || date : " + dateBin + " || FG : "
+//					+ filsGaucheBin + " || FD : " + filsDroitBin + " || LC : " + nextDoublonBin);
 
 			return stagiaire;
 
