@@ -11,7 +11,7 @@ public class FileDriver {
 
 	public static void readTextFile() {
 		// selection du fichier
-		File file = new File("TEST.DON");
+		File file = new File("STAGIAIRES.DON");
 
 		// ouvrir le fichier
 		try {

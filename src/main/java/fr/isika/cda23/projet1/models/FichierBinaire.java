@@ -15,9 +15,9 @@ public class FichierBinaire {
 
 			raf.writeChars(noeud.getCle().nomLong());
 			raf.writeChars(noeud.getCle().prenomLong());
-			raf.writeChars(noeud.getCle().codePostalLong());
+			raf.writeChars(noeud.getCle().departementLong());
 			raf.writeChars(noeud.getCle().promotionLong());
-			raf.writeChars(noeud.getCle().getDate());
+			raf.writeChars(noeud.getCle().getAnnee());
 			raf.writeInt(noeud.getFilsGauche());
 			raf.writeInt(noeud.getFilsDroit());
 			raf.writeInt(noeud.getNextDoublon());
@@ -37,9 +37,9 @@ public class FichierBinaire {
 			raf.seek(index);
 			raf.writeChars(noeud.getCle().nomLong());
 			raf.writeChars(noeud.getCle().prenomLong());
-			raf.writeChars(noeud.getCle().codePostalLong());
+			raf.writeChars(noeud.getCle().departementLong());
 			raf.writeChars(noeud.getCle().promotionLong());
-			raf.writeChars(noeud.getCle().getDate());
+			raf.writeChars(noeud.getCle().getAnnee());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -87,7 +87,7 @@ public class FichierBinaire {
 			for (int i = 0; i < Stagiaire.TAILLE_PRENOM_MAX; i++) {
 				prenomBin += raf.readChar();
 			}
-			for (int i = 0; i < Stagiaire.TAILLE_CODE_POSTAL_MAX; i++) {
+			for (int i = 0; i < Stagiaire.TAILLE_DEPARTEMENT_MAX; i++) {
 				codePostalBin += raf.readChar();
 			}
 			for (int i = 0; i < Stagiaire.TAILLE_PROMO_MAX; i++) {

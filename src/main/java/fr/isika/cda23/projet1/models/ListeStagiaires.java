@@ -14,5 +14,9 @@ public class ListeStagiaires {
 	public List<Stagiaire> getListe() {
 		return liste;
 	}
+	
+	public void clearList() {
+		liste.clear();
+	}
 
 }

@@ -12,16 +12,16 @@ import java.util.Objects;
 public class Stagiaire {
 
 	
-	private String nom;
-	private String prenom;
-	private String codePostal;
-	private String promotion;
-	private String date;
+	public String nom;
+	public String prenom;
+	public String departement;
+	public String promotion;
+	public String annee;
 
 	public final static int TAILLE_NOM_MAX = 21;
 	public final static int TAILLE_PRENOM_MAX = 20;
 	public final static int TAILLE_PROMO_MAX = 11;
-	public final static int TAILLE_CODE_POSTAL_MAX = 3;
+	public final static int TAILLE_DEPARTEMENT_MAX = 3;
 	public final static int TAILLE_NOEUD_MAX = 130;
 	public final static int INDEX_ACCES_FILS_GAUCHE = 118;
 	public final static int INDEX_ACCES_FILS_DROIT = 122;
@@ -36,17 +36,17 @@ public class Stagiaire {
 	 * @param promotion  promotion du stagiaire
 	 * @param date       date de la formation du stagiaire
 	 */
-	public Stagiaire(String nom, String prenom, String codePostal, String promotion, String date) {
+	public Stagiaire(String nom, String prenom, String departement, String promotion, String annee) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
-		this.codePostal = codePostal;
+		this.departement = departement;
 		this.promotion = promotion;
 		// Certaines dates n'étant pas renseignées, on remplace le vide par des X qui prendront la même taille dans le fichier
-		if (date.equals("")) {
-			this.date = "XXXX";
+		if (annee.equals("")) {
+			this.annee = "XXXX";
 		} else {
-			this.date = date;
+			this.annee = annee;
 		}
 
 	}
@@ -107,26 +107,26 @@ public class Stagiaire {
 	 * méthode qui permet de rajouter des espaces à un numéro de département pour atteindre la taille maximum imposé dans le fichier binaire
 	 * @return une String de 3 caractères
 	 */
-	public String codePostalLong() {
+	public String departementLong() {
 		String codePostalLong = "";
 
-		if (codePostal.length() < TAILLE_CODE_POSTAL_MAX) {
-			codePostalLong = codePostal;
-			for (int i = codePostal.length(); i < TAILLE_CODE_POSTAL_MAX; i++) {
+		if (departement.length() < TAILLE_DEPARTEMENT_MAX) {
+			codePostalLong = departement;
+			for (int i = departement.length(); i < TAILLE_DEPARTEMENT_MAX; i++) {
 				codePostalLong += " ";
 			}
 		} else {
-			codePostalLong = codePostal.substring(0, TAILLE_CODE_POSTAL_MAX);
+			codePostalLong = departement.substring(0, TAILLE_DEPARTEMENT_MAX);
 		}
 		return codePostalLong;
 	}
 
-	public String getCodePostal() {
-		return codePostal.trim();
+	public String getDepartement() {
+		return departement.trim();
 	}
 
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
+	public void setDepartement(String departement) {
+		this.departement = departement;
 	}
 
 	/**
@@ -155,23 +155,23 @@ public class Stagiaire {
 		this.promotion = promotion;
 	}
 
-	public String getDate() {
-		return date;
+	public String getAnnee() {
+		return annee;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setAnnee(String date) {
+		this.annee = date;
 	}
 
 	@Override
 	public String toString() {
-		return "Stagiaire [nom=" + nom + ", prenom=" + prenom + ", codePostal=" + codePostal + ", promotion="
-				+ promotion + ", date=" + date + "]";
+		return "Stagiaire [nom=" + nom + ", prenom=" + prenom + ", departement=" + departement + ", promotion="
+				+ promotion + ", annee=" + annee + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codePostal, date, nom, prenom, promotion);
+		return Objects.hash(departement, annee, nom, prenom, promotion);
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class Stagiaire {
 		if (getClass() != obj.getClass())
 			return false;
 		Stagiaire other = (Stagiaire) obj;
-		return Objects.equals(codePostal, other.codePostal) && Objects.equals(date, other.date)
+		return Objects.equals(departement, other.departement) && Objects.equals(annee, other.annee)
 				&& Objects.equals(nom, other.nom) && Objects.equals(prenom, other.prenom)
 				&& Objects.equals(promotion, other.promotion);
 	}

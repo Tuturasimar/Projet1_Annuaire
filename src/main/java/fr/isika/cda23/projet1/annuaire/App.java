@@ -1,30 +1,101 @@
 package fr.isika.cda23.projet1.annuaire;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import fr.isika.cda23.projet1.models.FichierBinaire;
+import fr.isika.cda23.projet1.models.FileDriver;
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 
 /**
  * JavaFX App
  */
 public class App extends Application {
 
-    @Override
-    public void start(Stage stage) {
-        
+	EditScreen editScreen;
 
-        var label = new Label("Hello World");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        scene.getRoot().setStyle("-fx-font-family: 'Helvetica'");
-        stage.setScene(scene);
-        stage.show();
-    }
+	public App() {
 
-    public static void main(String[] args) {
-        launch();
-    }
+	}
+
+	@Override
+	public void start(Stage stage) {
+
+		// recine de ma fenetre
+		BorderPane root = new BorderPane();
+
+		// Header
+		HBox hbLogo = new HBox();
+		root.setTop(hbLogo);
+		try {
+			Image image = new Image(new FileInputStream("/Users/mouchet19/Downloads/LogoCarré.png"));
+			ImageView imageView = new ImageView(image);
+
+			System.out.println(image.getUrl());
+			System.out.println(imageView.getId());
+			imageView.setX(50);
+			imageView.setY(25);
+
+			// setting the fit height and width of the image view
+			imageView.setFitHeight(100);
+			imageView.setFitWidth(300);
+
+			Group grpTest = new Group(imageView);
+			hbLogo.getChildren().add(grpTest);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+		}
+
+		root.setTop(hbLogo);
+		hbLogo.setAlignment(Pos.CENTER);
+		hbLogo.setStyle("-fx-background-color: red");
+
+		// GridPane central
+
+		editScreen = new EditScreen();
+		root.setCenter(editScreen);
+		editScreen.setAlignment(Pos.CENTER);
+
+		// Footer
+		HBox hbFooter = new HBox();
+		Label lblFooter = new Label("Footer");
+		hbFooter.getChildren().add(lblFooter);
+		root.setBottom(hbFooter);
+		hbFooter.setAlignment(Pos.CENTER);
+		hbFooter.setStyle("-fx-background-color: red");
+		hbFooter.setPrefHeight(100);
+		hbFooter.setMinHeight(100);
+		hbFooter.setMaxHeight(100);
+
+		// Scene
+		Scene scene = new Scene(root, 500, 500);
+		scene.getRoot().setStyle("-fx-font-family: 'serif'");
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	public static void main(String[] args) {
+		// Si le fichier binaire n'existe pas encore ou n'est pas rempli
+		if (FichierBinaire.lastIndex() == 0) {
+			// On récupère l'ensemble des données du fichier texte pour les écrire dans le
+			// fichier BIN
+			FileDriver.readTextFile();
+		}
+		
+		
+
+		launch();
+	}
 
 }

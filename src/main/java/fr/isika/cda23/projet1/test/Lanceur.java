@@ -17,9 +17,9 @@ public class Lanceur {
 			FileDriver.readTextFile();
 		}
 		
-		ListeStagiaires liste = new ListeStagiaires();
 		
-		Noeud racine = FichierBinaire.lireNoeud(0);
+		
+		
 //		racine.ajouterNoeud(new Noeud(new Stagiaire("GARIJO", "Rosie", "75", "AI 79", "2011")), 0);
 //		racine.ajouterNoeud(new Noeud(new Stagiaire("GARIJO", "Watson", "75", "AI 79", "2011")), 0);
 		//racine.ajouterNoeud(new Noeud(new Stagiaire("LACROIX", "Billy", "75", "AI 79", "2011")), 0);
@@ -32,13 +32,10 @@ public class Lanceur {
 //		racine.rechercheSupprimer(new Noeud(new Stagiaire("NOUAR", "Adel", "94", "ATOD 5", "2009")), 0, 0);
 //		racine.rechercheSupprimer(new Noeud(new Stagiaire("POTIN", "Thomas", "75", "ATOD 21", "2014")), 0, 0);
 //		racine.rechercheSupprimer(new Noeud(new Stagiaire("LACROIX", "Pascale", "91", "BOBI 5", "2008")), 0, 0);
-		//racine.rechercheSupprimer(new Noeud(new Stagiaire("LACROIX", "Billy", "75", "AI 79", "2011")), 0, 0);
+//		racine.rechercheSupprimer(new Noeud(new Stagiaire("LACROIX", "Billy", "75", "AI 79", "2011")), 0, 0);
 
 
-		racine.parcoursInfixe(0, liste);
-		for (Stagiaire stagiaire : liste.getListe()) {
-			System.out.println(stagiaire);
-		}
+		
 
 		System.out.println(FichierBinaire.lastIndex());
 

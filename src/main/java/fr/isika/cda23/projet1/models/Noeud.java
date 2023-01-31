@@ -169,8 +169,8 @@ public class Noeud {
 	 * Méthode qui va chercher dans l'arbre binaire le noeud à supprimer
 	 * 
 	 * @param noeud       noeud à supprimer
-	 * @param indexCible  l'index du noeud ciblé actuellement dans le fichier BIN
-	 * @param indexParent l'index du parent du noeud actuel
+	 * @param indexCible  l'index du noeud ciblé actuellement dans le fichier BIN (0 au premier appel)
+	 * @param indexParent l'index du parent du noeud actuel (0 au premier appel)
 	 */
 	public void rechercheSupprimer(Noeud noeud, int indexCible, int indexParent) {
 		try {
