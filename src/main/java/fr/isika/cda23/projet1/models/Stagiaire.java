@@ -1,5 +1,7 @@
 package fr.isika.cda23.projet1.models;
 
+import java.util.Objects;
+
 /**
  * La classe Stagiaire est celle qui représente l'ensemble des caractéristiques
  * associées à un stagiaire
@@ -166,5 +168,26 @@ public class Stagiaire {
 		return "Stagiaire [nom=" + nom + ", prenom=" + prenom + ", codePostal=" + codePostal + ", promotion="
 				+ promotion + ", date=" + date + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codePostal, date, nom, prenom, promotion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stagiaire other = (Stagiaire) obj;
+		return Objects.equals(codePostal, other.codePostal) && Objects.equals(date, other.date)
+				&& Objects.equals(nom, other.nom) && Objects.equals(prenom, other.prenom)
+				&& Objects.equals(promotion, other.promotion);
+	}
+	
+	
 
 }

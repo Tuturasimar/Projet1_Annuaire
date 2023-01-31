@@ -26,6 +26,38 @@ public class FichierBinaire {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Méthode pour réécrire par dessus un stagiaire déjà existant dans le fichier
+	 * @param index Position du pointeur dans le fichier
+	 * @param noeud Noeud du remplaçant
+	 */
+	public static void remplacerStagiaire(int index, Noeud noeud) {
+		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+			raf.seek(index);
+			raf.writeChars(noeud.getCle().nomLong());
+			raf.writeChars(noeud.getCle().prenomLong());
+			raf.writeChars(noeud.getCle().codePostalLong());
+			raf.writeChars(noeud.getCle().promotionLong());
+			raf.writeChars(noeud.getCle().getDate());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	/**
+	 * Méthode pour réécrire par dessus des valeurs d'index déjà existantes (FG, FD, LC)
+	 * @param index Position du pointeur dans le fichier
+	 * @param value Valeur de remplacement
+	 */
+	public static void remplacerFils(int index, int value) {
+		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+			raf.seek(index);
+			raf.writeInt(value);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	/**
 	 * Méthode permettant de lire et restituer les données d'un noeud
@@ -76,9 +108,9 @@ public class FichierBinaire {
 			stagiaire.setFilsDroit(filsDroitBin);
 			stagiaire.setNextDoublon(nextDoublonBin);
 
-//			System.out.println(index + " || nom : " + nomBin + " || prénom : " + prenomBin + " || cp : "
-//					+ codePostalBin + " || promotion : " + promotionBin + " || date : " + dateBin + " || FG : "
-//					+ filsGaucheBin + " || FD : " + filsDroitBin + " || LC : " + nextDoublonBin);
+			System.out.println(index + " || nom : " + nomBin + " || prénom : " + prenomBin + " || cp : "
+					+ codePostalBin + " || promotion : " + promotionBin + " || date : " + dateBin + " || FG : "
+					+ filsGaucheBin + " || FD : " + filsDroitBin + " || LC : " + nextDoublonBin);
 
 			return stagiaire;
 
