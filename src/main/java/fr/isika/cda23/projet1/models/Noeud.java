@@ -153,7 +153,7 @@ public class Noeud {
 				// Affiche suite à la récursivité l'ensemble des stagiaires par ordre
 				// alphabétique
 				liste.ajouterStagiaire(this.cle);
-				
+
 			}
 			// Si un fils droit existe pour ce noeud
 			if (this.filsDroit != -1) {
@@ -169,7 +169,8 @@ public class Noeud {
 	 * Méthode qui va chercher dans l'arbre binaire le noeud à supprimer
 	 * 
 	 * @param noeud       noeud à supprimer
-	 * @param indexCible  l'index du noeud ciblé actuellement dans le fichier BIN (0 au premier appel)
+	 * @param indexCible  l'index du noeud ciblé actuellement dans le fichier BIN (0
+	 *                    au premier appel)
 	 * @param indexParent l'index du parent du noeud actuel (0 au premier appel)
 	 */
 	public void rechercheSupprimer(Noeud noeud, int indexCible, int indexParent) {
@@ -256,7 +257,6 @@ public class Noeud {
 			// Appel de la méthode qui gère les différents cas de suppression
 			casDeSuppressions(noeud, parent, indexCible, indexParent);
 		}
-
 	}
 
 	/**

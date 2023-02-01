@@ -12,7 +12,7 @@ public class Utilisateur {
 	/**
 	 * isAdmin est un boolean pour déterminer si l'utilisateur actuel est un administrateur
 	 */
-	boolean isAdmin;
+	public static boolean isAdmin;
 	
 	/**
 	 * KEY est une constante qui renseigne la clé pour s'authentifier en tant qu'utilisateur
@@ -22,6 +22,11 @@ public class Utilisateur {
 	public Utilisateur(boolean isAdmin) {
 		super();
 		this.isAdmin = false;
+	}
+	
+	public static boolean isAdmin() {
+		isAdmin = true;
+		return isAdmin;
 	}
 	
 	

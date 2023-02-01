@@ -21,12 +21,6 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-	EditScreen editScreen;
-
-	public App() {
-
-	}
-
 	@Override
 	public void start(Stage stage) {
 
@@ -37,11 +31,8 @@ public class App extends Application {
 		HBox hbLogo = new HBox();
 		root.setTop(hbLogo);
 		try {
-			Image image = new Image(new FileInputStream("/Users/mouchet19/Downloads/LogoCarré.png"));
+			Image image = new Image(new FileInputStream("LogoCarré.png"));
 			ImageView imageView = new ImageView(image);
-
-			System.out.println(image.getUrl());
-			System.out.println(imageView.getId());
 			imageView.setX(50);
 			imageView.setY(25);
 
@@ -63,9 +54,11 @@ public class App extends Application {
 
 		// GridPane central
 
-		editScreen = new EditScreen();
-		root.setCenter(editScreen);
-		editScreen.setAlignment(Pos.CENTER);
+		EditScreen editScreen = new EditScreen();
+		HomeScreen homeScreen = new HomeScreen();
+
+		root.setCenter(homeScreen);
+		homeScreen.setAlignment(Pos.CENTER);
 
 		// Footer
 		HBox hbFooter = new HBox();
@@ -92,8 +85,6 @@ public class App extends Application {
 			// fichier BIN
 			FileDriver.readTextFile();
 		}
-		
-		
 
 		launch();
 	}
