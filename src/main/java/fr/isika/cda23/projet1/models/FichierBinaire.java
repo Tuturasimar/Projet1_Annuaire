@@ -73,7 +73,7 @@ public class FichierBinaire {
 			raf.seek(index * Stagiaire.TAILLE_NOEUD_MAX);
 			String nomBin = "";
 			String prenomBin = "";
-			String codePostalBin = "";
+			String departementBin = "";
 			String promotionBin = "";
 			String dateBin = "";
 			int filsGaucheBin;
@@ -88,7 +88,7 @@ public class FichierBinaire {
 				prenomBin += raf.readChar();
 			}
 			for (int i = 0; i < Stagiaire.TAILLE_DEPARTEMENT_MAX; i++) {
-				codePostalBin += raf.readChar();
+				departementBin += raf.readChar();
 			}
 			for (int i = 0; i < Stagiaire.TAILLE_PROMO_MAX; i++) {
 				promotionBin += raf.readChar();
@@ -103,7 +103,7 @@ public class FichierBinaire {
 			// On instancie un nouveau Noeud en appliquant la méthode .trim() pour supprimer
 			// les espaces inutiles
 			Noeud stagiaire = new Noeud(
-					new Stagiaire(nomBin.trim(), prenomBin.trim(), codePostalBin.trim(), promotionBin.trim(), dateBin));
+					new Stagiaire(nomBin.trim(), prenomBin.trim(), departementBin.trim(), promotionBin.trim(), dateBin));
 			stagiaire.setFilsGauche(filsGaucheBin);
 			stagiaire.setFilsDroit(filsDroitBin);
 			stagiaire.setNextDoublon(nextDoublonBin);
@@ -171,6 +171,18 @@ public class FichierBinaire {
 		}
 
 	}
+	
+//	public static void lireInt(int index, RandomAccessFile raf, Noeud noeud,String nomModifie) {
+//		try {
+//			raf.seek(index);
+//			int indexFichier = raf.readInt();
+//			if(indexFichier != - 1) {
+//				noeud.modifierNom(noeud, nomModifie, indexFichier);
+//			}
+//		} catch (Exception e) {
+//			
+//		}
+//	}
 
 	/**
 	 * Méthode permettant de récupérer le dernier index du fichier binaire

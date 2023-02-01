@@ -18,5 +18,12 @@ public class ListeStagiaires {
 	public void clearList() {
 		liste.clear();
 	}
+	
+	public static ListeStagiaires listInitialisation() {
+		ListeStagiaires liste = new ListeStagiaires();
+		Noeud racine = FichierBinaire.lireNoeud(0);
+		racine.parcoursInfixe(0, liste);
+		return liste;
+	}
 
 }

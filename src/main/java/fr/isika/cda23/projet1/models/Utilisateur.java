@@ -12,19 +12,19 @@ public class Utilisateur {
 	/**
 	 * isAdmin est un boolean pour déterminer si l'utilisateur actuel est un administrateur
 	 */
-	public static boolean isAdmin;
+	public boolean isAdmin;
 	
 	/**
 	 * KEY est une constante qui renseigne la clé pour s'authentifier en tant qu'utilisateur
 	 */
 	final String KEY = "admin";
 
-	public Utilisateur(boolean isAdmin) {
+	public Utilisateur() {
 		super();
 		this.isAdmin = false;
 	}
 	
-	public static boolean isAdmin() {
+	public boolean isAdmin() {
 		isAdmin = true;
 		return isAdmin;
 	}

@@ -2,9 +2,7 @@ package fr.isika.cda23.projet1.test;
 
 import fr.isika.cda23.projet1.models.FichierBinaire;
 import fr.isika.cda23.projet1.models.FileDriver;
-import fr.isika.cda23.projet1.models.ListeStagiaires;
-import fr.isika.cda23.projet1.models.Noeud;
-import fr.isika.cda23.projet1.models.Stagiaire;
+
 
 public class Lanceur {
 

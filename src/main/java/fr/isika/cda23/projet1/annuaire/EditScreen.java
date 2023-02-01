@@ -75,7 +75,7 @@ public class EditScreen extends GridPane {
 //				for (Stagiaire stagiaire : liste.getListe()) {
 //					System.out.println(stagiaire);
 //				}
-				TableauStagiaire tableauStagiaire = new TableauStagiaire(liste.getListe());
+				TableauStagiaire tableauStagiaire = new TableauStagiaire();
 
 				Scene scene = new Scene(tableauStagiaire);
 				scene.getRoot().setStyle("-fx-font-family: 'serif'");

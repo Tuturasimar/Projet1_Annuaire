@@ -322,7 +322,7 @@ public class Noeud {
 			// Si l'index du noeud supprimé correspond au fils droit du parent
 		} else {
 			// On remplace la valeur de l'index du FD chez le parent par - 1
-			FichierBinaire.remplacerFils(indexParent * Stagiaire.TAILLE_NOEUD_MAX + Stagiaire.INDEX_ACCES_FILS_GAUCHE,
+			FichierBinaire.remplacerFils(indexParent * Stagiaire.TAILLE_NOEUD_MAX + Stagiaire.INDEX_ACCES_FILS_DROIT,
 					-1);
 		}
 	}
@@ -403,4 +403,8 @@ public class Noeud {
 		}
 	}
 
+	public void modifier(Noeud nouveauNoeud,Noeud ancienNoeud, int index) {
+			FichierBinaire.lireNoeud(0).rechercheSupprimer(ancienNoeud, 0, 0);
+			nouveauNoeud.ajouterNoeud(nouveauNoeud, 0);
+	}
 }

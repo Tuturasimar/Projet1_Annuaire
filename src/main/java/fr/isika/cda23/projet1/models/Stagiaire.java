@@ -12,11 +12,11 @@ import java.util.Objects;
 public class Stagiaire {
 
 	
-	public String nom;
-	public String prenom;
-	public String departement;
-	public String promotion;
-	public String annee;
+	private String nom;
+	private String prenom;
+	private String departement;
+	private String promotion;
+	private String annee;
 
 	public final static int TAILLE_NOM_MAX = 21;
 	public final static int TAILLE_PRENOM_MAX = 20;

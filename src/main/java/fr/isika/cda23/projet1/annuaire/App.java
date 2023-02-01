@@ -50,29 +50,32 @@ public class App extends Application {
 
 		root.setTop(hbLogo);
 		hbLogo.setAlignment(Pos.CENTER);
-		hbLogo.setStyle("-fx-background-color: red");
+		hbLogo.setStyle("-fx-background-color: bisque");
 
 		// GridPane central
 
 		EditScreen editScreen = new EditScreen();
 		HomeScreen homeScreen = new HomeScreen();
+		
 
-		root.setCenter(homeScreen);
-		homeScreen.setAlignment(Pos.CENTER);
+		TableauStagiaire tableau = new TableauStagiaire();
+
+		root.setCenter(tableau);
+		tableau.setAlignment(Pos.CENTER);
 
 		// Footer
 		HBox hbFooter = new HBox();
-		Label lblFooter = new Label("Footer");
+		Label lblFooter = new Label("Projet 1 - Annuaire - Groupe de travail : Arbam, Senkoun, Trévor");
 		hbFooter.getChildren().add(lblFooter);
 		root.setBottom(hbFooter);
 		hbFooter.setAlignment(Pos.CENTER);
-		hbFooter.setStyle("-fx-background-color: red");
+		hbFooter.setStyle("-fx-background-color: bisque");
 		hbFooter.setPrefHeight(100);
 		hbFooter.setMinHeight(100);
 		hbFooter.setMaxHeight(100);
 
 		// Scene
-		Scene scene = new Scene(root, 500, 500);
+		Scene scene = new Scene(root, 900, 700);
 		scene.getRoot().setStyle("-fx-font-family: 'serif'");
 		stage.setScene(scene);
 		stage.show();
