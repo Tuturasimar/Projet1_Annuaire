@@ -6,10 +6,12 @@ import fr.isika.cda23.projet1.models.Noeud;
 import fr.isika.cda23.projet1.models.Stagiaire;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -76,12 +78,10 @@ public class EditScreen extends GridPane {
 //					System.out.println(stagiaire);
 //				}
 				TableauStagiaire tableauStagiaire = new TableauStagiaire();
+				BorderPane root = (BorderPane) btnValidez.getScene().getRoot();
+				root.setCenter(tableauStagiaire);
+				tableauStagiaire.setAlignment(Pos.CENTER);
 
-				Scene scene = new Scene(tableauStagiaire);
-				scene.getRoot().setStyle("-fx-font-family: 'serif'");
-				Stage stage = (Stage) EditScreen.this.getScene().getWindow();
-				stage.setScene(scene);
-				
 //				scene = btnRetour.getScene();
 //				scene.setRoot(new TableauStagiaire(liste.getListe()));
 

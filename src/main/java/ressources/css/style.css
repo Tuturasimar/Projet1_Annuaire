@@ -1,0 +1,34 @@
+.root {
+	-fx-background-color: grey;
+}
+ .hbFooter {
+	-fx-alignment: center;
+	-fx-background-color: red;
+ height: 100.0px;
+ min-height: 100.0px;
+ max-height: 100.0px;
+	}
+	
+.lblRole {
+	-fx-font: 15.0px "Avenir Next";
+	-fx-alignment: center-left;	
+	-fx-text-fill: black;
+}
+.lblTitre {
+	-fx-background-color: yellow;
+	-fx-font: 30.0px "Arial";
+	-fx-text-fill: rgb(255.0,0.0,0.0);
+	-fx-padding: 0.0 200.0px 0.0 0.0;
+	-fx-content-display: center;
+	-fx-border: 10.0px solid black;
+}
+ .button {
+	-fx-font: 20.0px "Avenir Next";
+	-fx-background-color: F1B404;
+	-fx-background-radius: 5.0px;
+	-fx-text-fill: black;
+	-fx-padding: 5.0px;
+	-fx-padding: 0.0 0.0 0.0px 0.0;
+	
+	
+}

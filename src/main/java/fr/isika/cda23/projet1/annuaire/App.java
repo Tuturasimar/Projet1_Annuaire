@@ -54,14 +54,11 @@ public class App extends Application {
 
 		// GridPane central
 
-		EditScreen editScreen = new EditScreen();
-		HomeScreen homeScreen = new HomeScreen();
 		
+		HomeScreen homeScreen = new HomeScreen();
 
-		TableauStagiaire tableau = new TableauStagiaire();
-
-		root.setCenter(tableau);
-		tableau.setAlignment(Pos.CENTER);
+		root.setCenter(homeScreen);
+		homeScreen.setAlignment(Pos.CENTER);
 
 		// Footer
 		HBox hbFooter = new HBox();
@@ -77,6 +74,7 @@ public class App extends Application {
 		// Scene
 		Scene scene = new Scene(root, 900, 700);
 		scene.getRoot().setStyle("-fx-font-family: 'serif'");
+		scene.getStylesheets().add(getClass().getResource("/ressources/css/style.css").toString());
 		stage.setScene(scene);
 		stage.show();
 	}

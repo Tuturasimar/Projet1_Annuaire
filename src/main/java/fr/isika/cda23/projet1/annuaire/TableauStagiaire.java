@@ -11,15 +11,21 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
@@ -30,6 +36,41 @@ public class TableauStagiaire extends GridPane {
 		super();
 		Utilisateur admin = new Utilisateur();
 		admin.isAdmin();
+		
+		ChoiceBox<String>ChoiceBoxTri = new ChoiceBox<>();
+		ChoiceBoxTri.getItems().addAll("Trier par:","Nom","Prenom","Promotion", "Année","Département");
+		ChoiceBoxTri.getSelectionModel().select(0);
+		
+		HBox hb = new HBox(30);
+		TextField txtRecherche = new TextField();
+		txtRecherche.prefHeight(100);
+
+		Button btnRechercher = new Button("RECHERCHER");
+		Button btnAddStagiaire = new Button("AJOUTER STAGIAIRE");
+		hb.setSpacing(10);
+		hb.getChildren().addAll(txtRecherche, btnRechercher, ChoiceBoxTri,btnAddStagiaire);
+		
+		btnAddStagiaire.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				EditScreen editScreen = new EditScreen();
+				//Scene scene = new Scene(editScreen);
+				BorderPane root = (BorderPane) btnAddStagiaire.getScene().getRoot();
+				root.setCenter(editScreen);
+				editScreen.setAlignment(Pos.CENTER);
+			}
+		});
+		
+		
+		HBox hbox = new HBox();
+		hbox.getChildren().add(hb);
+		hbox.setSpacing(10);
+		hbox.setPadding(new Insets(10, 0, 10, 0));
+		hbox.setAlignment(Pos.CENTER);
+
+		this.add(hbox, 0, 0);
 
 		TableView<Stagiaire> tableStagiaire = new TableView<Stagiaire>();
 		tableStagiaire.setEditable(true);
@@ -200,7 +241,7 @@ public class TableauStagiaire extends GridPane {
 		}
 		// On rempli la table avec la liste observable
 		tableStagiaire.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
-		this.add(tableStagiaire, 0, 0);
+		this.add(tableStagiaire, 0, 1);
 
 	}
 
