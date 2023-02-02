@@ -1,22 +1,25 @@
+
 package fr.isika.cda23.projet1.annuaire;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import fr.isika.cda23.projet1.models.Utilisateur;
 import javafx.beans.value.ObservableValue;
 
-
-public class AdminLoginScreen extends GridPane{
+public class AdminLoginScreen extends GridPane {
 
 	public AdminLoginScreen() {
-		
+
 		super();
 		try {
 
@@ -69,53 +72,46 @@ public class AdminLoginScreen extends GridPane{
 					});
 
 			// LAbel pour afficher le message
-			Label label = new Label("");
-			this.add(label, 0, 3);
-			GridPane.setColumnSpan(label, 2);
+			Label errorLabel = new Label("");
+			this.add(errorLabel, 0, 3);
+			GridPane.setColumnSpan(errorLabel, 2);
 
 			// BUtton utilisateur
-			Button utilisateur = new Button("Continuer en tant qu'utilisateur");
-			this.add(utilisateur, 1, 2);
+			Button btnUtilisateur = new Button("Continuer en tant qu'utilisateur");
+			this.add(btnUtilisateur, 1, 2);
 
-			utilisateur.setOnAction(new EventHandler<ActionEvent>() {
+			btnUtilisateur.setOnAction(new EventHandler<ActionEvent>() {
 
 				@Override
 				public void handle(ActionEvent event) {
-
-			
-
+					TableauStagiaire tableauStagiaire = new TableauStagiaire();
+					BorderPane root = (BorderPane) btnUtilisateur.getScene().getRoot();
+					root.setCenter(tableauStagiaire);
+					tableauStagiaire.setAlignment(Pos.CENTER);
 				}
 			});
-
 			// BUtton Login pour Administrateur
 			Button valider = new Button("VALIDER");
 			this.add(valider, 2, 2);
 
 			valider.setOnAction(new EventHandler<ActionEvent>() {
-
 				@Override
 				public void handle(ActionEvent event) {
-					if ((logintf.getText() != null && !passwordField.getText().isEmpty())) {
-
-						if (!passwordField.getText().equals("ADMIN")) {
-							label.setText("Mot de passe erroné");
-							label.setTextFill(Color.RED);
-						} else {
-							label.setText("je passe à la page suivante");
-							label.setTextFill(Color.BLACK);
-						}
-
+					String enteredPassword = passwordField.getText();
+					Utilisateur.checkPassword(enteredPassword);
+					if (Utilisateur.isAdmin) {
+						TableauStagiaire tableauStagiaire = new TableauStagiaire();
+						BorderPane root = (BorderPane) valider.getScene().getRoot();
+						root.setCenter(tableauStagiaire);
+						tableauStagiaire.setAlignment(Pos.CENTER);
 					} else {
-						label.setText("Enter Login et Mot de passe");
+						errorLabel.setText("Mot de passe incorrect");
+						errorLabel.getStyleClass().add("incorrect-label");
 					}
-
 				}
-
 			});
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

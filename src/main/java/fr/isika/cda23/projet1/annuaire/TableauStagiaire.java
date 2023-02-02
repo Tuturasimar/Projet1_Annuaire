@@ -1,7 +1,5 @@
 package fr.isika.cda23.projet1.annuaire;
 
-
-
 import fr.isika.cda23.projet1.models.FichierBinaire;
 import fr.isika.cda23.projet1.models.ListeStagiaires;
 import fr.isika.cda23.projet1.models.Noeud;
@@ -11,7 +9,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -30,50 +27,70 @@ import javafx.util.Callback;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 public class TableauStagiaire extends GridPane {
+	
 
 	@SuppressWarnings("unchecked")
 	public TableauStagiaire() {
 		super();
-		Utilisateur admin = new Utilisateur();
-		admin.isAdmin();
 		
-		ChoiceBox<String>ChoiceBoxTri = new ChoiceBox<>();
-		ChoiceBoxTri.getItems().addAll("Trier par:","Nom","Prenom","Promotion", "Année","Département");
+
+		TableView<Stagiaire> tableStagiaire = new TableView<Stagiaire>();
+		tableStagiaire.setEditable(true);
+
+		ChoiceBox<String> ChoiceBoxTri = new ChoiceBox<>();
+		ChoiceBoxTri.getItems().addAll("Trier par:", "Nom", "Prenom", "Departement", "Promotion", "Annee");
 		ChoiceBoxTri.getSelectionModel().select(0);
-		
+		ChoiceBoxTri.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				if (ChoiceBoxTri.getItems().size() == 6) {
+					ChoiceBoxTri.getItems().remove(0);
+				}
+			}
+		});
+
 		HBox hb = new HBox(30);
 		TextField txtRecherche = new TextField();
-		txtRecherche.prefHeight(100);
+		txtRecherche.setMinHeight(30);
 
 		Button btnRechercher = new Button("RECHERCHER");
+		btnRechercher.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				String value = txtRecherche.getText();
+				String filtre = ChoiceBoxTri.getValue();
+				if (!value.equals("") && !filtre.equals("Trier par:")) {
+
+					tableStagiaire.setItems(FXCollections
+							.observableArrayList(ListeStagiaires.listFilterInitialisation(filtre, value).getListe()));
+
+				}
+
+			}
+		});
+
 		Button btnAddStagiaire = new Button("AJOUTER STAGIAIRE");
-		hb.setSpacing(10);
-		hb.getChildren().addAll(txtRecherche, btnRechercher, ChoiceBoxTri,btnAddStagiaire);
-		
+		hb.getChildren().addAll(txtRecherche, ChoiceBoxTri, btnRechercher, btnAddStagiaire);
 		btnAddStagiaire.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
 				EditScreen editScreen = new EditScreen();
-				//Scene scene = new Scene(editScreen);
+				// Scene scene = new Scene(editScreen);
 				BorderPane root = (BorderPane) btnAddStagiaire.getScene().getRoot();
 				root.setCenter(editScreen);
 				editScreen.setAlignment(Pos.CENTER);
 			}
 		});
-		
-		
+
 		HBox hbox = new HBox();
 		hbox.getChildren().add(hb);
-		hbox.setSpacing(10);
-		hbox.setPadding(new Insets(10, 0, 10, 0));
 		hbox.setAlignment(Pos.CENTER);
 
 		this.add(hbox, 0, 0);
-
-		TableView<Stagiaire> tableStagiaire = new TableView<Stagiaire>();
-		tableStagiaire.setEditable(true);
 
 		// Creation des colonnes
 
@@ -116,7 +133,6 @@ public class TableauStagiaire extends GridPane {
 						return null;
 					}
 				});
-		deleteCol.setMinWidth(100);
 		deleteCol.setStyle("-fx-alignment: center");
 		deleteCol.setCellFactory(new Callback<TableColumn<Stagiaire, Void>, TableCell<Stagiaire, Void>>() {
 
@@ -124,6 +140,8 @@ public class TableauStagiaire extends GridPane {
 			public TableCell<Stagiaire, Void> call(TableColumn<Stagiaire, Void> param) {
 
 				return new TableCell<Stagiaire, Void>() {
+					
+					
 					private Button buttonDelete = new Button("Supprimer");
 
 					{
@@ -154,7 +172,7 @@ public class TableauStagiaire extends GridPane {
 
 		});
 
-		if (admin.isAdmin) {
+		if (Utilisateur.isAdmin) {
 			nomStagiaire.setCellFactory(TextFieldTableCell.<Stagiaire>forTableColumn());
 			nomStagiaire.setOnEditCommit((CellEditEvent<Stagiaire, String> event) -> {
 				TablePosition<Stagiaire, String> pos = event.getTablePosition();
@@ -166,7 +184,7 @@ public class TableauStagiaire extends GridPane {
 				Noeud noeudModifie = new Noeud(stagiaire);
 				Noeud ancienNoeud = new Noeud(new Stagiaire(oldNom.toUpperCase(), stagiaire.getPrenom(),
 						stagiaire.getDepartement(), stagiaire.getPromotion(), stagiaire.getAnnee()));
-				noeudModifie.modifier(noeudModifie, ancienNoeud, 0);
+				noeudModifie.modifier(noeudModifie, ancienNoeud);
 				tableStagiaire
 						.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 
@@ -182,7 +200,7 @@ public class TableauStagiaire extends GridPane {
 				Noeud noeudModifie = new Noeud(stagiaire);
 				Noeud ancienNoeud = new Noeud(new Stagiaire(stagiaire.getNom(), oldPrenom, stagiaire.getDepartement(),
 						stagiaire.getPromotion(), stagiaire.getAnnee()));
-				noeudModifie.modifier(noeudModifie, ancienNoeud, 0);
+				noeudModifie.modifier(noeudModifie, ancienNoeud);
 				tableStagiaire
 						.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 
@@ -198,7 +216,7 @@ public class TableauStagiaire extends GridPane {
 				Noeud noeudModifie = new Noeud(stagiaire);
 				Noeud ancienNoeud = new Noeud(new Stagiaire(stagiaire.getNom(), stagiaire.getPrenom(), oldDepartement,
 						stagiaire.getPromotion(), stagiaire.getAnnee()));
-				noeudModifie.modifier(noeudModifie, ancienNoeud, 0);
+				noeudModifie.modifier(noeudModifie, ancienNoeud);
 				tableStagiaire
 						.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 			});
@@ -213,7 +231,7 @@ public class TableauStagiaire extends GridPane {
 				Noeud noeudModifie = new Noeud(stagiaire);
 				Noeud ancienNoeud = new Noeud(new Stagiaire(stagiaire.getNom(), stagiaire.getPrenom(),
 						stagiaire.getDepartement(), oldPromo, stagiaire.getAnnee()));
-				noeudModifie.modifier(noeudModifie, ancienNoeud, 0);
+				noeudModifie.modifier(noeudModifie, ancienNoeud);
 				tableStagiaire
 						.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 			});
@@ -228,7 +246,7 @@ public class TableauStagiaire extends GridPane {
 				Noeud noeudModifie = new Noeud(stagiaire);
 				Noeud ancienNoeud = new Noeud(new Stagiaire(stagiaire.getNom(), stagiaire.getPrenom(),
 						stagiaire.getDepartement(), stagiaire.getPromotion(), oldAnnee));
-				noeudModifie.modifier(noeudModifie, ancienNoeud, 0);
+				noeudModifie.modifier(noeudModifie, ancienNoeud);
 				tableStagiaire
 						.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 			});
@@ -236,12 +254,13 @@ public class TableauStagiaire extends GridPane {
 		}
 
 		tableStagiaire.getColumns().addAll(nomStagiaire, prenomStagiaire, dptStagiaire, promoStagiaire, anneeStagiaire);
-		if (admin.isAdmin) {
+		if (Utilisateur.isAdmin) {
 			tableStagiaire.getColumns().add(deleteCol);
 		}
 		// On rempli la table avec la liste observable
 		tableStagiaire.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 		this.add(tableStagiaire, 0, 1);
+		this.setVgap(20);
 
 	}
 

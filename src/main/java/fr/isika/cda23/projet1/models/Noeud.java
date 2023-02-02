@@ -134,6 +134,7 @@ public class Noeud {
 	 * les stagiaires
 	 * 
 	 * @param index index actuel de la recherche (au début du parcours : 0)
+	 * @param liste liste initialisée qui se remplit au fur et à mesure
 	 */
 	public void parcoursInfixe(int index, ListeStagiaires liste) {
 		if (this != null) {
@@ -161,6 +162,53 @@ public class Noeud {
 				Noeud filsDroit = FichierBinaire.lireNoeud(this.filsDroit);
 				// Appel récursif en envoyant l'index du fils droit
 				filsDroit.parcoursInfixe(this.filsDroit, liste);
+			}
+		}
+	}
+
+	/**
+	 * Méthode qui permet de parcourir le fichier, de trier les noms par ordre alphabétiques tout en ajoutant un filtre sur un autre attribut d'un stagiaire
+	 * @param index index actuel de la recherche (0 au premier appel)
+	 * @param liste liste initialisée qui se remplit au fur et à mesure
+	 * @param filtre critère de recherche (Nom, Prenom, Departement, Promotion, Annee)
+	 * @param recherche chaine de caractère que l'utilisateur renseigne pour la recherche
+	 */
+	public void parcoursInfixeFiltre(int index, ListeStagiaires liste, String filtre, String recherche) {
+		if (this != null) {
+
+			// Si un fils gauche existe pour ce noeud
+			if (this.filsGauche != -1) {
+				// On va récupérer les données du fils gauche
+				Noeud filsGauche = FichierBinaire.lireNoeud(this.filsGauche);
+				// Récursivité en envoyant comme index celui du fils gauche
+				filsGauche.parcoursInfixeFiltre(this.filsGauche, liste, filtre, recherche);
+			}
+			if (this.nextDoublon != -1) {
+				Noeud nextDoublon = FichierBinaire.lireNoeud(this.nextDoublon);
+				nextDoublon.parcoursInfixeFiltre(this.nextDoublon, liste, filtre, recherche);
+			}
+			if (this.cle != null) {
+				// Affiche suite à la récursivité l'ensemble des stagiaires par ordre
+				// alphabétique
+				// Différentes méthodes de tri (nom, prenom, département, promotion, année)
+				if (filtre.equals("Nom") && this.cle.getNom().contains(recherche.toUpperCase())
+						|| filtre.equals("Prenom")
+								&& this.cle.getPrenom().toLowerCase().contains(recherche.toLowerCase())
+						|| filtre.equals("Departement")
+								&& this.cle.getDepartement().toLowerCase().contains(recherche.toLowerCase())
+						|| filtre.equals("Promotion")
+								&& this.cle.getPromotion().toLowerCase().contains(recherche.toLowerCase())
+						|| filtre.equals("Annee")
+								&& this.cle.getAnnee().toLowerCase().contains(recherche.toLowerCase())) {
+					liste.ajouterStagiaire(this.cle);
+				}
+			}
+			// Si un fils droit existe pour ce noeud
+			if (this.filsDroit != -1) {
+				// On récupère les données du fils droit
+				Noeud filsDroit = FichierBinaire.lireNoeud(this.filsDroit);
+				// Appel récursif en envoyant l'index du fils droit
+				filsDroit.parcoursInfixeFiltre(this.filsDroit, liste, filtre, recherche);
 			}
 		}
 	}
@@ -403,8 +451,13 @@ public class Noeud {
 		}
 	}
 
-	public void modifier(Noeud nouveauNoeud,Noeud ancienNoeud, int index) {
-			FichierBinaire.lireNoeud(0).rechercheSupprimer(ancienNoeud, 0, 0);
-			nouveauNoeud.ajouterNoeud(nouveauNoeud, 0);
+	/**
+	 * Méthode permettant de modifier un stagiaire dans le fichier
+	 * @param nouveauNoeud noeud qui va remplacer l'ancien
+	 * @param ancienNoeud noeud qui va être remplacé
+	 */
+	public void modifier(Noeud nouveauNoeud, Noeud ancienNoeud) {
+		FichierBinaire.lireNoeud(0).rechercheSupprimer(ancienNoeud, 0, 0);
+		nouveauNoeud.ajouterNoeud(nouveauNoeud, 0);
 	}
 }

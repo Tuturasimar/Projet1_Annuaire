@@ -25,5 +25,11 @@ public class ListeStagiaires {
 		racine.parcoursInfixe(0, liste);
 		return liste;
 	}
+	
+	public static ListeStagiaires listFilterInitialisation(String filtre, String recherche) {
+		ListeStagiaires liste = new ListeStagiaires();
+		FichierBinaire.lireNoeud(0).parcoursInfixeFiltre(0, liste, filtre, recherche);
+		return liste;
+	}
 
 }

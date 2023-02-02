@@ -24,6 +24,8 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) {
 
+		stage.setResizable(false);
+
 		// recine de ma fenetre
 		BorderPane root = new BorderPane();
 
@@ -48,7 +50,6 @@ public class App extends Application {
 			e.printStackTrace();
 		}
 
-		root.setTop(hbLogo);
 		hbLogo.setAlignment(Pos.CENTER);
 		hbLogo.setStyle("-fx-background-color: bisque");
 

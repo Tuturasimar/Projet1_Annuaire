@@ -34,7 +34,6 @@ public class HomeScreen extends GridPane {
 		this.setVgap(10);
 
 		btnAdmin.setOnAction(event -> {
-
 			AdminLoginScreen adminLoginScreen = new AdminLoginScreen();
 			BorderPane root = (BorderPane) btnAdmin.getScene().getRoot();
 			root.setCenter(adminLoginScreen);
