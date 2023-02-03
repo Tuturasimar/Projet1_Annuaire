@@ -9,10 +9,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -23,22 +25,20 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 public class TableauStagiaire extends GridPane {
-	
 
 	@SuppressWarnings("unchecked")
 	public TableauStagiaire() {
 		super();
-		
-
 		TableView<Stagiaire> tableStagiaire = new TableView<Stagiaire>();
 		tableStagiaire.setEditable(true);
 
 		ChoiceBox<String> ChoiceBoxTri = new ChoiceBox<>();
-		ChoiceBoxTri.getItems().addAll("Trier par:", "Nom", "Prenom", "Departement", "Promotion", "Annee");
+		ChoiceBoxTri.getItems().addAll("Trier par:", "Nom", "Prénom", "Département", "Promotion", "Année");
 		ChoiceBoxTri.getSelectionModel().select(0);
 		ChoiceBoxTri.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -50,11 +50,19 @@ public class TableauStagiaire extends GridPane {
 			}
 		});
 
-		HBox hb = new HBox(30);
+		HBox hboxBoutons = new HBox(30);
 		TextField txtRecherche = new TextField();
-		txtRecherche.setMinHeight(30);
+		txtRecherche.setPromptText("Recherche...");
+		txtRecherche.setMinHeight(40);
+		txtRecherche.setFont(Font.font("Avenir", 16));
+		hboxBoutons.setFillHeight(true);
+		hboxBoutons.setAlignment(Pos.CENTER_LEFT);
 
-		Button btnRechercher = new Button("RECHERCHER");
+		Label errorLabel = new Label("");
+		errorLabel.getStyleClass().add("incorrect-label");
+		errorLabel.setVisible(false);
+
+		Button btnRechercher = new Button("Rechercher");
 		btnRechercher.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -62,17 +70,25 @@ public class TableauStagiaire extends GridPane {
 				String value = txtRecherche.getText();
 				String filtre = ChoiceBoxTri.getValue();
 				if (!value.equals("") && !filtre.equals("Trier par:")) {
-
+					errorLabel.setVisible(false);
+					errorLabel.setText("");
 					tableStagiaire.setItems(FXCollections
 							.observableArrayList(ListeStagiaires.listFilterInitialisation(filtre, value).getListe()));
 
+				} else {
+					errorLabel.setVisible(true);
+					if (value.equals("")) {
+						errorLabel.setText("Renseignez votre recherche");
+					} else {
+						errorLabel.setText("Renseignez un filtre de recherche");
+					}
 				}
 
 			}
 		});
 
-		Button btnAddStagiaire = new Button("AJOUTER STAGIAIRE");
-		hb.getChildren().addAll(txtRecherche, ChoiceBoxTri, btnRechercher, btnAddStagiaire);
+		Button btnAddStagiaire = new Button("Ajouter stagiaire");
+		hboxBoutons.getChildren().addAll(ChoiceBoxTri, txtRecherche, btnRechercher, btnAddStagiaire);
 		btnAddStagiaire.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -86,11 +102,8 @@ public class TableauStagiaire extends GridPane {
 			}
 		});
 
-		HBox hbox = new HBox();
-		hbox.getChildren().add(hb);
-		hbox.setAlignment(Pos.CENTER);
-
-		this.add(hbox, 0, 0);
+		this.add(hboxBoutons, 0, 0);
+		this.add(errorLabel, 0, 1);
 
 		// Creation des colonnes
 
@@ -110,7 +123,7 @@ public class TableauStagiaire extends GridPane {
 		prenomStagiaire.setPrefWidth(150);
 
 		TableColumn<Stagiaire, String> dptStagiaire = new TableColumn<Stagiaire, String>("Département");
-		dptStagiaire.setMinWidth(85);
+		dptStagiaire.setMinWidth(110);
 		dptStagiaire.setCellValueFactory(new PropertyValueFactory<Stagiaire, String>("departement"));
 		dptStagiaire.setStyle("-fx-alignment: center");
 
@@ -140,11 +153,11 @@ public class TableauStagiaire extends GridPane {
 			public TableCell<Stagiaire, Void> call(TableColumn<Stagiaire, Void> param) {
 
 				return new TableCell<Stagiaire, Void>() {
-					
-					
+
 					private Button buttonDelete = new Button("Supprimer");
 
 					{
+						buttonDelete.getStyleClass().add("deleteButton");
 						buttonDelete.setOnAction(new EventHandler<ActionEvent>() {
 
 							@Override
@@ -259,8 +272,8 @@ public class TableauStagiaire extends GridPane {
 		}
 		// On rempli la table avec la liste observable
 		tableStagiaire.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
-		this.add(tableStagiaire, 0, 1);
-		this.setVgap(20);
+		this.add(tableStagiaire, 0, 2);
+		this.setVgap(5);
 
 	}
 

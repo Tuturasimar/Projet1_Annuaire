@@ -12,26 +12,29 @@ public class HomeScreen extends GridPane {
 	public HomeScreen() {
 		super();
 
-		Label lblTitre = new Label("Acceuil");
+		Label lblTitre = new Label("Bienvenue");
 		HBox hbTitre = new HBox();
 		hbTitre.getChildren().add(lblTitre);
 		lblTitre.getStyleClass().add("lblTitre");
+		hbTitre.setAlignment(Pos.CENTER);
 		
 
-		Label lblRole = new Label("Choisissez votre rôle");
+		Label lblRole = new Label("Choisissez votre rôle :");
 		lblRole.getStyleClass().add("lblRole");
 		Button btnStagiaire = new Button("Stagiaire");
-		Button btnAdmin = new Button("Admin");
+		Button btnAdmin = new Button("Administrateur");
 		HBox hbRole = new HBox();
 
 		hbRole.getChildren().addAll(lblRole, btnAdmin, btnStagiaire);
 
 //	Labels GridPane central
-		this.add(lblTitre, 0, 0);
-		this.add(lblRole, 0, 1);
-		this.add(btnStagiaire, 0, 2);
-		this.add(btnAdmin, 1, 2);
-		this.setVgap(10);
+		this.add(hbTitre,1,0);
+		this.add(lblRole, 1, 1);
+		this.add(btnStagiaire, 0, 3);
+		this.add(btnAdmin, 2, 3);
+		this.setVgap(40);
+		this.setHgap(40);
+		//this.setGridLinesVisible(true);
 
 		btnAdmin.setOnAction(event -> {
 			AdminLoginScreen adminLoginScreen = new AdminLoginScreen();

@@ -192,13 +192,13 @@ public class Noeud {
 				// alphabétique
 				// Différentes méthodes de tri (nom, prenom, département, promotion, année)
 				if (filtre.equals("Nom") && this.cle.getNom().contains(recherche.toUpperCase())
-						|| filtre.equals("Prenom")
+						|| filtre.equals("Prénom")
 								&& this.cle.getPrenom().toLowerCase().contains(recherche.toLowerCase())
-						|| filtre.equals("Departement")
+						|| filtre.equals("Département")
 								&& this.cle.getDepartement().toLowerCase().contains(recherche.toLowerCase())
 						|| filtre.equals("Promotion")
 								&& this.cle.getPromotion().toLowerCase().contains(recherche.toLowerCase())
-						|| filtre.equals("Annee")
+						|| filtre.equals("Année")
 								&& this.cle.getAnnee().toLowerCase().contains(recherche.toLowerCase())) {
 					liste.ajouterStagiaire(this.cle);
 				}

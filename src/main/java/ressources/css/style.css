@@ -1,45 +1,129 @@
+/*
+ * RACINE
+*/
 .root {
-	-fx-background-color: grey;
+	-fx-background-color: #6DAEDB;
 }
 
-
-.hbFooter {
-	-fx-alignment: center;
-	-fx-background-color: red;
-    height: 100px;
-    min-height: 100px;
-    max-height: 100px;
-	}
-	
-.lblRole {
-	-fx-font: 15px "Avenir Next";
-	-fx-alignment: center-left;	
-	-fx-text-fill: black;
-}
-
+/*
+ * FONT
+ */
+ 
+ .label{
+ 	-fx-text-fill : white;
+ 	-fx-font-family: "Avenir";
+ 	-fx-font-size: 16px;
+ }
+ 
 .lblTitre {
-	-fx-background-color: yellow;
-	-fx-font: 30px "Arial";
-	-fx-text-fill: rgb(255,0,0);
-	-fx-padding: 0 200px 0 0; 	
+	-fx-font-size: 45.0px;
+	-fx-font-weight: bold;
 	-fx-content-display: center;
-	-fx-border: 10px solid black;
+	-fx-text-alignment: center;
+}
+
+.lblRole {
+	-fx-font: 20.0px "Avenir Next";
+	-fx-text-fill: #173753;
 }
 
 
-.button {
-	-fx-font: 20px "Avenir Next";
-	-fx-background-color: F1B404;
-	-fx-background-radius: 5px;
-	-fx-text-fill: black;
-	-fx-padding: 5 5 5 5;
-	
-}
-/* AdminLoginScreen class*/
 .validation-label {
   -fx-text-fill: green;
 }
 
 .incorrect-label {
- -fx-text-fill: red;
+ -fx-text-fill: #AB0505;
+ -fx-font-family: "Avenir Next";
 }
+
+.txtUtilisateur {
+	-fx-text-fill : #173753;
+	-fx-underline : true;
+	-fx-font-size : 14.0px;
+	-fx-font-family: "Avenir";
+}
+
+.txtUtilisateur:hover {
+	-fx-cursor: hand;
+	-fx-text-fill: #1D70A2;
+	-fx-text-style: italic;
+	
+}
+
+
+/*
+ * HEADER - FOOTER
+ */
+ .hbFooter, .hbLogo {
+	-fx-alignment: center;
+	-fx-background-color: #173753;
+    -fx-pref-height: 100.0px;
+	}
+ /*
+  * BUTTON
+  */
+  
+.button {
+	-fx-font-size: 18; 
+	-fx-font-family: "Avenir";
+	-fx-background-color: #1D70A2;
+	-fx-background-radius: 5.0px;
+	-fx-text-fill: black;
+	-fx-padding: 5.0 5.0 5.0 5.0;
+	-fx-min-width: 150.0px;
+}
+
+.button:hover{
+	-fx-background-color: #2892D7;
+	-fx-cursor: hand;
+	-fx-text-fill : white;
+}
+
+.deleteButton {
+	-fx-font-size: 14;
+	-fx-min-width : 0;
+}
+
+.deleteButton:hover {
+	-fx-background-color: #AB0505;
+	-fx-text-fill : white;
+}
+
+/**
+ * CHECKBOXES / CHOICEBOX
+ */
+ 
+ .check-box, .choice-box .label {
+ 	-fx-font-family : "Avenir";
+ 	-fx-text-fill : #173753;
+ }
+ 
+ /**
+  * TABLEAU
+  */
+  
+  .table-cell {
+    -fx-padding: 0.5em;
+    -fx-border-color: transparent -fx-box-border transparent transparent;
+    -fx-font-size: 14px;
+    -fx-font-family: "Avenir";
+    -fx-text-fill: #173753;
+}
+
+.table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {
+    -fx-background-color: #2892D7;
+}
+
+.table-row-cell:filled:selected .table-cell {
+	-fx-text-fill : white;
+}
+ 
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #173753;
+    -fx-size: 24px;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: -1 0 0 -1;
+    -fx-padding: 0 5 0 0;
+}
+ 

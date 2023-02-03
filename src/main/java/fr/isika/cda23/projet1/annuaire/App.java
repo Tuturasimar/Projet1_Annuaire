@@ -31,16 +31,18 @@ public class App extends Application {
 
 		// Header
 		HBox hbLogo = new HBox();
+		hbLogo.getStyleClass().add("hbLogo");
+
 		root.setTop(hbLogo);
 		try {
-			Image image = new Image(new FileInputStream("LogoCarré.png"));
+			Image image = new Image(new FileInputStream("logoASTAnnuaire.png"));
 			ImageView imageView = new ImageView(image);
 			imageView.setX(50);
 			imageView.setY(25);
 
 			// setting the fit height and width of the image view
 			imageView.setFitHeight(100);
-			imageView.setFitWidth(300);
+			imageView.setFitWidth(100);
 
 			Group grpTest = new Group(imageView);
 			hbLogo.getChildren().add(grpTest);
@@ -51,7 +53,6 @@ public class App extends Application {
 		}
 
 		hbLogo.setAlignment(Pos.CENTER);
-		hbLogo.setStyle("-fx-background-color: bisque");
 
 		// GridPane central
 
@@ -67,13 +68,11 @@ public class App extends Application {
 		hbFooter.getChildren().add(lblFooter);
 		root.setBottom(hbFooter);
 		hbFooter.setAlignment(Pos.CENTER);
-		hbFooter.setStyle("-fx-background-color: bisque");
-		hbFooter.setPrefHeight(100);
-		hbFooter.setMinHeight(100);
-		hbFooter.setMaxHeight(100);
+		hbFooter.getStyleClass().add("hbFooter");
+
 
 		// Scene
-		Scene scene = new Scene(root, 900, 700);
+		Scene scene = new Scene(root, 900, 750);
 		scene.getRoot().setStyle("-fx-font-family: 'serif'");
 		scene.getStylesheets().add(getClass().getResource("/ressources/css/style.css").toString());
 		stage.setScene(scene);

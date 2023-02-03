@@ -10,9 +10,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import fr.isika.cda23.projet1.models.Utilisateur;
 import javafx.beans.value.ObservableValue;
 
@@ -27,28 +29,31 @@ public class AdminLoginScreen extends GridPane {
 			this.setHgap(25);
 			this.setVgap(15);
 
-			// Scene scene = new Scene(root, 650, 200);
-			// scene.getStylesheets().add(getClass().getResource("appllication.css").toExternalForm());
-
-			// LAbel Logiin
+			// Label Login
 			Label login = new Label("Login");
 			this.add(login, 0, 0);
 
-			// TExtField Login
+			// TextField Login
 			TextField logintf = new TextField();
+			logintf.setFont(Font.font("Avenir",16));
+
 			this.add(logintf, 1, 0);
 
-			// LAbel Password
+			// Label Password
 			Label password = new Label("Mot de passe");
 			this.add(password, 0, 1);
 
 			// PAssword field
 			PasswordField passwordField = new PasswordField();
+			passwordField.setFont(Font.font("Avenir",16));
+
 			this.add(passwordField, 1, 1);
 
 			// POur afficher le PAssword
 			TextField pass_text = new TextField();
 			pass_text.setVisible(false);
+			pass_text.setFont(Font.font("Avenir",16));
+
 			this.add(pass_text, 1, 1);
 
 			// checkBOx "afficher"
@@ -70,26 +75,32 @@ public class AdminLoginScreen extends GridPane {
 							return;
 						}
 					});
-
 			// LAbel pour afficher le message
 			Label errorLabel = new Label("");
+			errorLabel.getStyleClass().add("incorrect-label");
 			this.add(errorLabel, 0, 3);
 			GridPane.setColumnSpan(errorLabel, 2);
 
-			// BUtton utilisateur
-			Button btnUtilisateur = new Button("Continuer en tant qu'utilisateur");
-			this.add(btnUtilisateur, 1, 2);
+			// Text utilisateur
+			Label txtUtilisateur = new Label("Continuer en tant qu'utilisateur");
+			txtUtilisateur.getStyleClass().add("txtUtilisateur");
 
-			btnUtilisateur.setOnAction(new EventHandler<ActionEvent>() {
+			this.add(txtUtilisateur, 1, 2);
 
+			txtUtilisateur.setOnMousePressed(new EventHandler<MouseEvent>() {
 				@Override
-				public void handle(ActionEvent event) {
+				public void handle(MouseEvent me) {
 					TableauStagiaire tableauStagiaire = new TableauStagiaire();
-					BorderPane root = (BorderPane) btnUtilisateur.getScene().getRoot();
+					BorderPane root = (BorderPane) txtUtilisateur.getScene().getRoot();
 					root.setCenter(tableauStagiaire);
 					tableauStagiaire.setAlignment(Pos.CENTER);
 				}
 			});
+
+			Label testLabel = new Label();
+
+			this.add(testLabel, 0, 4);
+
 			// BUtton Login pour Administrateur
 			Button valider = new Button("VALIDER");
 			this.add(valider, 2, 2);
@@ -97,18 +108,26 @@ public class AdminLoginScreen extends GridPane {
 			valider.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					testLabel.setText(logintf.getText());
 					String enteredPassword = passwordField.getText();
-					Utilisateur.checkPassword(enteredPassword);
-					if (Utilisateur.isAdmin) {
-						TableauStagiaire tableauStagiaire = new TableauStagiaire();
-						BorderPane root = (BorderPane) valider.getScene().getRoot();
-						root.setCenter(tableauStagiaire);
-						tableauStagiaire.setAlignment(Pos.CENTER);
+					if (!logintf.getText().isEmpty()
+							&& (!passwordField.getText().isEmpty() || !pass_text.getText().isEmpty())) {
+						Utilisateur.checkPassword(enteredPassword);
+						Utilisateur.checkPassword(pass_text.getText());
+						if (Utilisateur.isAdmin) {
+							TableauStagiaire tableauStagiaire = new TableauStagiaire();
+							BorderPane root = (BorderPane) valider.getScene().getRoot();
+							root.setCenter(tableauStagiaire);
+							tableauStagiaire.setAlignment(Pos.CENTER);
+						} else {
+							errorLabel.setText("Mot de passe incorrect");
+						}
 					} else {
-						errorLabel.setText("Mot de passe incorrect");
-						errorLabel.getStyleClass().add("incorrect-label");
+						errorLabel.setText("Renseignez les champs");
 					}
+
 				}
+
 			});
 		} catch (Exception e) {
 			e.printStackTrace();
