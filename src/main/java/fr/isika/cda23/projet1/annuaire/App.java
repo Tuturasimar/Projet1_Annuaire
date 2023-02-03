@@ -42,7 +42,7 @@ public class App extends Application {
 
 			// setting the fit height and width of the image view
 			imageView.setFitHeight(100);
-			imageView.setFitWidth(100);
+			imageView.setFitWidth(300);
 
 			Group grpTest = new Group(imageView);
 			hbLogo.getChildren().add(grpTest);

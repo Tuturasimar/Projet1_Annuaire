@@ -9,7 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -77,13 +77,18 @@ public class TableauStagiaire extends GridPane {
 
 				} else {
 					errorLabel.setVisible(true);
+					String errorMessageString = "";
 					if (value.equals("")) {
-						errorLabel.setText("Renseignez votre recherche");
-					} else {
-						errorLabel.setText("Renseignez un filtre de recherche");
+						errorMessageString += "- Renseignez votre recherche -";
+						tableStagiaire.setItems(
+								FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 					}
+					if (filtre.equals("Trier par:")) {
+						errorMessageString += "- Renseignez un filtre de recherche -";
+					}
+					errorLabel.setText(errorMessageString);
 				}
-
+				txtRecherche.setText("");
 			}
 		});
 
@@ -101,9 +106,22 @@ public class TableauStagiaire extends GridPane {
 				editScreen.setAlignment(Pos.CENTER);
 			}
 		});
+		
+		Button btnRefresh = new Button("Rafraîchir");
+		btnRefresh.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent event) {
+				tableStagiaire.setItems(
+						FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
+			}
+		});
+
+		
 		this.add(hboxBoutons, 0, 0);
 		this.add(errorLabel, 0, 1);
+		this.add(btnRefresh,0 , 1);
+		TableauStagiaire.setHalignment(btnRefresh, HPos.RIGHT);
 
 		// Creation des colonnes
 
@@ -273,7 +291,7 @@ public class TableauStagiaire extends GridPane {
 		// On rempli la table avec la liste observable
 		tableStagiaire.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 		this.add(tableStagiaire, 0, 2);
-		this.setVgap(5);
+		this.setVgap(10);
 
 	}
 

@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import fr.isika.cda23.projet1.models.Utilisateur;
 import javafx.beans.value.ObservableValue;
 
