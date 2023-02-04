@@ -7,8 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe permettant de gérer l'extraction des données du fichier texte
+ * @author Trévor
+ *
+ */
 public class FileDriver {
 
+	/**
+	 * Méthode pour extraire les données d'un fichier texte afin de remplir le futur fichier BIN
+	 */
 	public static void readTextFile() {
 		// selection du fichier
 		File file = new File("STAGIAIRES.DON");

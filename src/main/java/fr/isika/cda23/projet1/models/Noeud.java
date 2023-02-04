@@ -138,7 +138,6 @@ public class Noeud {
 	 */
 	public void parcoursInfixe(int index, ListeStagiaires liste) {
 		if (this != null) {
-
 			// Si un fils gauche existe pour ce noeud
 			if (this.filsGauche != -1) {
 				// On va récupérer les données du fils gauche
@@ -154,7 +153,6 @@ public class Noeud {
 				// Affiche suite à la récursivité l'ensemble des stagiaires par ordre
 				// alphabétique
 				liste.ajouterStagiaire(this.cle);
-
 			}
 			// Si un fils droit existe pour ce noeud
 			if (this.filsDroit != -1) {
@@ -167,15 +165,18 @@ public class Noeud {
 	}
 
 	/**
-	 * Méthode qui permet de parcourir le fichier, de trier les noms par ordre alphabétiques tout en ajoutant un filtre sur un autre attribut d'un stagiaire
-	 * @param index index actuel de la recherche (0 au premier appel)
-	 * @param liste liste initialisée qui se remplit au fur et à mesure
-	 * @param filtre critère de recherche (Nom, Prenom, Departement, Promotion, Annee)
-	 * @param recherche chaine de caractère que l'utilisateur renseigne pour la recherche
+	 * Méthode qui permet de parcourir le fichier, de trier les noms par ordre
+	 * alphabétiques tout en ajoutant un filtre sur un autre attribut d'un stagiaire
+	 * 
+	 * @param index     index actuel de la recherche (0 au premier appel)
+	 * @param liste     liste initialisée qui se remplit au fur et à mesure
+	 * @param filtre    critère de recherche (Nom, Prenom, Departement, Promotion,
+	 *                  Annee)
+	 * @param recherche chaine de caractère que l'utilisateur renseigne pour la
+	 *                  recherche
 	 */
 	public void parcoursInfixeFiltre(int index, ListeStagiaires liste, String filtre, String recherche) {
 		if (this != null) {
-
 			// Si un fils gauche existe pour ce noeud
 			if (this.filsGauche != -1) {
 				// On va récupérer les données du fils gauche
@@ -453,8 +454,9 @@ public class Noeud {
 
 	/**
 	 * Méthode permettant de modifier un stagiaire dans le fichier
+	 * 
 	 * @param nouveauNoeud noeud qui va remplacer l'ancien
-	 * @param ancienNoeud noeud qui va être remplacé
+	 * @param ancienNoeud  noeud qui va être remplacé
 	 */
 	public void modifier(Noeud nouveauNoeud, Noeud ancienNoeud) {
 		FichierBinaire.lireNoeud(0).rechercheSupprimer(ancienNoeud, 0, 0);

@@ -51,7 +51,6 @@
 	
 }
 
-
 /*
  * HEADER - FOOTER
  */
@@ -87,6 +86,7 @@
 .deleteButton {
 	-fx-font-size: 14;
 	-fx-min-width : 0;
+	-fx-background-color: #2892D7;
 }
 
 .deleteButton:hover {
@@ -107,7 +107,7 @@
   * TABLEAU
   */
   
-  .table-cell {
+.table-cell {
     -fx-padding: 0.5em;
     -fx-border-color: transparent -fx-box-border transparent transparent;
     -fx-font-size: 14px;

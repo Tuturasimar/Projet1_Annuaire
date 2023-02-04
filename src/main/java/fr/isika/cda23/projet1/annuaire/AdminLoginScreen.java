@@ -34,7 +34,7 @@ public class AdminLoginScreen extends GridPane {
 
 			// TextField Login
 			TextField logintf = new TextField();
-			logintf.setFont(Font.font("Avenir",16));
+			logintf.setFont(Font.font("Avenir", 16));
 
 			this.add(logintf, 1, 0);
 
@@ -44,14 +44,14 @@ public class AdminLoginScreen extends GridPane {
 
 			// PAssword field
 			PasswordField passwordField = new PasswordField();
-			passwordField.setFont(Font.font("Avenir",16));
+			passwordField.setFont(Font.font("Avenir", 16));
 
 			this.add(passwordField, 1, 1);
 
 			// POur afficher le PAssword
 			TextField pass_text = new TextField();
 			pass_text.setVisible(false);
-			pass_text.setFont(Font.font("Avenir",16));
+			pass_text.setFont(Font.font("Avenir", 16));
 
 			this.add(pass_text, 1, 1);
 
@@ -96,10 +96,6 @@ public class AdminLoginScreen extends GridPane {
 				}
 			});
 
-			Label testLabel = new Label();
-
-			this.add(testLabel, 0, 4);
-
 			// BUtton Login pour Administrateur
 			Button valider = new Button("VALIDER");
 			this.add(valider, 2, 2);
@@ -107,7 +103,7 @@ public class AdminLoginScreen extends GridPane {
 			valider.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					testLabel.setText(logintf.getText());
+
 					String enteredPassword = passwordField.getText();
 					if (!logintf.getText().isEmpty()
 							&& (!passwordField.getText().isEmpty() || !pass_text.getText().isEmpty())) {

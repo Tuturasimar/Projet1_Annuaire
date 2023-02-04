@@ -2,6 +2,11 @@ package fr.isika.cda23.projet1.models;
 
 import java.io.RandomAccessFile;
 
+/**
+ * Classe permettant d'interagir avec le fichier binaire
+ * @author Trévor
+ *
+ */
 public class FichierBinaire {
 
 	/**
@@ -171,18 +176,6 @@ public class FichierBinaire {
 		}
 
 	}
-	
-//	public static void lireInt(int index, RandomAccessFile raf, Noeud noeud,String nomModifie) {
-//		try {
-//			raf.seek(index);
-//			int indexFichier = raf.readInt();
-//			if(indexFichier != - 1) {
-//				noeud.modifierNom(noeud, nomModifie, indexFichier);
-//			}
-//		} catch (Exception e) {
-//			
-//		}
-//	}
 
 	/**
 	 * Méthode permettant de récupérer le dernier index du fichier binaire

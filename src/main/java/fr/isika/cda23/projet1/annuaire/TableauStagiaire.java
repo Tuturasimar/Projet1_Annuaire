@@ -52,6 +52,8 @@ public class TableauStagiaire extends GridPane {
 
 		HBox hboxBoutons = new HBox(30);
 		TextField txtRecherche = new TextField();
+		
+		
 		txtRecherche.setPromptText("Recherche...");
 		txtRecherche.setMinHeight(40);
 		txtRecherche.setFont(Font.font("Avenir", 16));
@@ -93,7 +95,11 @@ public class TableauStagiaire extends GridPane {
 		});
 
 		Button btnAddStagiaire = new Button("Ajouter stagiaire");
-		hboxBoutons.getChildren().addAll(ChoiceBoxTri, txtRecherche, btnRechercher, btnAddStagiaire);
+		HBox hboxRightButton = new HBox(20);
+		hboxRightButton.getChildren().addAll(btnRechercher,btnAddStagiaire);
+		
+
+		hboxBoutons.getChildren().addAll(ChoiceBoxTri, txtRecherche, hboxRightButton);
 		btnAddStagiaire.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -122,6 +128,7 @@ public class TableauStagiaire extends GridPane {
 		this.add(errorLabel, 0, 1);
 		this.add(btnRefresh,0 , 1);
 		TableauStagiaire.setHalignment(btnRefresh, HPos.RIGHT);
+		TableauStagiaire.setHalignment(hboxRightButton, HPos.RIGHT);
 
 		// Creation des colonnes
 
