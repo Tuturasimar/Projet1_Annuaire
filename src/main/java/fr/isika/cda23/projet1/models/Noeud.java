@@ -192,12 +192,17 @@ public class Noeud {
 				// Affiche suite à la récursivité l'ensemble des stagiaires par ordre
 				// alphabétique
 				// Différentes méthodes de tri (nom, prenom, département, promotion, année)
+				
+				// Si le filtre est "nom" et que le nom récupéré est plus grand ou de même taille que la recherche
 				if (filtre.equals("Nom") && this.cle.getNom().length() >= recherche.length()) {
+					// Si le nom "coupé" par rapport à la longueur de la recherche est identique à la recherche
 					if (this.cle.getNom().toLowerCase().substring(0, recherche.length())
 							.equals(recherche.toLowerCase())) {
+						// Alors on l'ajoute à la liste
 						liste.ajouterStagiaire(this.cle);
 					}
 				}
+				// En fonction du filtre, si la recherche est contenue dans l'élément correspondant, on l'ajoute à la liste
 				if (filtre.equals("Prénom") && this.cle.getPrenom().toLowerCase().contains(recherche.toLowerCase())
 						|| filtre.equals("Département")
 								&& this.cle.getDepartement().toLowerCase().contains(recherche.toLowerCase())

@@ -9,12 +9,14 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PopupControl;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -22,9 +24,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -46,10 +55,11 @@ public class TableauStagiaire extends GridPane {
 			public void handle(ActionEvent event) {
 				if (ChoiceBoxTri.getItems().size() == 6) {
 					ChoiceBoxTri.getItems().remove(0);
-				}
+				}			 
 			}
 		});
-
+		ChoiceBoxTri.setPrefWidth(130);
+	
 		HBox hboxBoutons = new HBox(30);
 		TextField txtRecherche = new TextField();
 		
@@ -58,7 +68,9 @@ public class TableauStagiaire extends GridPane {
 		txtRecherche.setMinHeight(40);
 		txtRecherche.setFont(Font.font("Avenir", 16));
 		hboxBoutons.setFillHeight(true);
-		hboxBoutons.setAlignment(Pos.CENTER_LEFT);
+		hboxBoutons.setAlignment(Pos.CENTER_RIGHT);
+		
+		
 
 		Label errorLabel = new Label("");
 		errorLabel.getStyleClass().add("incorrect-label");
@@ -97,7 +109,7 @@ public class TableauStagiaire extends GridPane {
 		Button btnAddStagiaire = new Button("Ajouter stagiaire");
 		HBox hboxRightButton = new HBox(20);
 		hboxRightButton.getChildren().addAll(btnRechercher,btnAddStagiaire);
-		
+		hboxRightButton.setAlignment(Pos.CENTER_RIGHT);
 
 		hboxBoutons.getChildren().addAll(ChoiceBoxTri, txtRecherche, hboxRightButton);
 		btnAddStagiaire.setOnAction(new EventHandler<ActionEvent>() {
@@ -129,6 +141,7 @@ public class TableauStagiaire extends GridPane {
 		this.add(btnRefresh,0 , 1);
 		TableauStagiaire.setHalignment(btnRefresh, HPos.RIGHT);
 		TableauStagiaire.setHalignment(hboxRightButton, HPos.RIGHT);
+		hboxRightButton.setMaxWidth(300);
 
 		// Creation des colonnes
 

@@ -26,7 +26,7 @@ public class App extends Application {
 
 		stage.setResizable(false);
 
-		// recine de ma fenetre
+		// racine de ma fenetre
 		BorderPane root = new BorderPane();
 
 		// Header
@@ -40,15 +40,13 @@ public class App extends Application {
 			imageView.setX(50);
 			imageView.setY(25);
 
-			// setting the fit height and width of the image view
+			// On recalibre les dimensions du logo
 			imageView.setFitHeight(100);
 			imageView.setFitWidth(300);
 
 			Group grpTest = new Group(imageView);
 			hbLogo.getChildren().add(grpTest);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-
 			e.printStackTrace();
 		}
 
@@ -58,7 +56,6 @@ public class App extends Application {
 
 		
 		HomeScreen homeScreen = new HomeScreen();
-
 		root.setCenter(homeScreen);
 		homeScreen.setAlignment(Pos.CENTER);
 
