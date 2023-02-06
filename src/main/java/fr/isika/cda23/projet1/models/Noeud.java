@@ -93,7 +93,7 @@ public class Noeud {
 	 * 
 	 */
 	public void ajouterNoeud(Noeud noeud, int index) {
-		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "rw")) {
 			// Si le fichier est déjà rempli
 			if (raf.length() != 0) {
 				String nom = noeud.cle.getNom();
@@ -233,7 +233,7 @@ public class Noeud {
 	 */
 	public void rechercheSupprimer(Noeud noeud, int indexCible, int indexParent) {
 		try {
-			RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw");
+			RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "rw");
 			String nom = noeud.cle.getNom();
 			int startPosition = indexCible * Stagiaire.TAILLE_NOEUD_MAX;
 			// On récupère le nom à l'index correspondant dans le BIN

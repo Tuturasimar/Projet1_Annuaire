@@ -15,7 +15,7 @@ public class FichierBinaire {
 	 * @param noeud Noeud rajouté au fichier
 	 */
 	public static void ecritureFichier(Noeud noeud) {
-		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "rw")) {
 			raf.seek(raf.length());
 
 			raf.writeChars(noeud.getCle().nomLong());
@@ -38,7 +38,7 @@ public class FichierBinaire {
 	 * @param noeud Noeud du remplaçant
 	 */
 	public static void remplacerStagiaire(int index, Noeud noeud) {
-		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "rw")) {
 			raf.seek(index);
 			raf.writeChars(noeud.getCle().nomLong());
 			raf.writeChars(noeud.getCle().prenomLong());
@@ -56,7 +56,7 @@ public class FichierBinaire {
 	 * @param value Valeur de remplacement
 	 */
 	public static void remplacerFils(int index, int value) {
-		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "rw")) {
 			raf.seek(index);
 			raf.writeInt(value);
 		} catch (Exception e) {
@@ -73,7 +73,7 @@ public class FichierBinaire {
 	 */
 	public static Noeud lireNoeud(int index) {
 
-		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "r")) {
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "r")) {
 			// On place le pointeur au début du Noeud souhaité
 			raf.seek(index * Stagiaire.TAILLE_NOEUD_MAX);
 			String nomBin = "";
@@ -184,7 +184,7 @@ public class FichierBinaire {
 	 */
 	@SuppressWarnings("null")
 	public static int lastIndex() {
-		try (RandomAccessFile raf = new RandomAccessFile("STAGIAIRES.bin", "rw")) {
+		try (RandomAccessFile raf = new RandomAccessFile("src/main/java/assets/STAGIAIRES.bin", "rw")) {
 			// Chaque Noeud fait 130 octets, donc on peut récupérer le dernier index en
 			// divisant la longueur totale du fichier par 130
 			return (int) raf.length() / Stagiaire.TAILLE_NOEUD_MAX;

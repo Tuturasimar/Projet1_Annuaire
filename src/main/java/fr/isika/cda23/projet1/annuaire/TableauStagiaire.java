@@ -1,5 +1,20 @@
 package fr.isika.cda23.projet1.annuaire;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import fr.isika.cda23.projet1.models.FichierBinaire;
 import fr.isika.cda23.projet1.models.ListeStagiaires;
 import fr.isika.cda23.projet1.models.Noeud;
@@ -55,26 +70,26 @@ public class TableauStagiaire extends GridPane {
 			public void handle(ActionEvent event) {
 				if (ChoiceBoxTri.getItems().size() == 6) {
 					ChoiceBoxTri.getItems().remove(0);
-				}			 
+				}
 			}
 		});
 		ChoiceBoxTri.setPrefWidth(130);
-	
+		
 		HBox hboxBoutons = new HBox(30);
 		TextField txtRecherche = new TextField();
-		
-		
+
 		txtRecherche.setPromptText("Recherche...");
 		txtRecherche.setMinHeight(40);
 		txtRecherche.setFont(Font.font("Avenir", 16));
 		hboxBoutons.setFillHeight(true);
 		hboxBoutons.setAlignment(Pos.CENTER_RIGHT);
-		
-		
 
+		HBox errorBox = new HBox();
 		Label errorLabel = new Label("");
 		errorLabel.getStyleClass().add("incorrect-label");
 		errorLabel.setVisible(false);
+		errorBox.getChildren().add(errorLabel);
+		errorBox.setPrefWidth(400);
 
 		Button btnRechercher = new Button("Rechercher");
 		btnRechercher.setOnAction(new EventHandler<ActionEvent>() {
@@ -93,12 +108,12 @@ public class TableauStagiaire extends GridPane {
 					errorLabel.setVisible(true);
 					String errorMessageString = "";
 					if (value.equals("")) {
-						errorMessageString += "- Renseignez votre recherche -";
+						errorMessageString += "- Renseignez votre recherche\n";
 						tableStagiaire.setItems(
 								FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 					}
 					if (filtre.equals("Trier par:")) {
-						errorMessageString += "- Renseignez un filtre de recherche -";
+						errorMessageString += "- Renseignez un filtre de recherche";
 					}
 					errorLabel.setText(errorMessageString);
 				}
@@ -108,7 +123,7 @@ public class TableauStagiaire extends GridPane {
 
 		Button btnAddStagiaire = new Button("Ajouter stagiaire");
 		HBox hboxRightButton = new HBox(20);
-		hboxRightButton.getChildren().addAll(btnRechercher,btnAddStagiaire);
+		hboxRightButton.getChildren().addAll(btnRechercher, btnAddStagiaire);
 		hboxRightButton.setAlignment(Pos.CENTER_RIGHT);
 
 		hboxBoutons.getChildren().addAll(ChoiceBoxTri, txtRecherche, hboxRightButton);
@@ -124,22 +139,110 @@ public class TableauStagiaire extends GridPane {
 				editScreen.setAlignment(Pos.CENTER);
 			}
 		});
+		HBox hboxBoutonsSecondRow = new HBox(20);
+		hboxBoutonsSecondRow.setPrefWidth(200);
 		
+
+		Button btnPrint = new Button("Imprimer");
+		btnPrint.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				Document document = new Document();
+
+				try {
+					File pdf = new File("src/main/java/assets/aperçu.pdf");
+					PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(pdf));
+					document.open();
+//					
+					PdfPTable pdfTable = new PdfPTable(5); // 5 colonnes pour le nom, le prénom, le département, la
+															// promotion et l'année
+					pdfTable.setWidthPercentage(100);
+					pdfTable.setSpacingBefore(10f);
+					pdfTable.setSpacingAfter(10f);
+
+					// En-têtes de colonnes
+					PdfPCell nomHeader = new PdfPCell(new Phrase("Nom"));
+					nomHeader.setBorderColor(BaseColor.BLACK);
+					nomHeader.setPaddingLeft(10);
+					nomHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+					nomHeader.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					nomHeader.setBackgroundColor(BaseColor.GRAY);
+					pdfTable.addCell(nomHeader);
+
+					PdfPCell prenomHeader = new PdfPCell(new Phrase("Prénom"));
+					prenomHeader.setBorderColor(BaseColor.BLACK);
+					prenomHeader.setPaddingLeft(10);
+					prenomHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+					prenomHeader.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					prenomHeader.setBackgroundColor(BaseColor.GRAY);
+					pdfTable.addCell(prenomHeader);
+
+					PdfPCell dptHeader = new PdfPCell(new Phrase("Département"));
+					dptHeader.setBorderColor(BaseColor.BLACK);
+					dptHeader.setPaddingLeft(10);
+					dptHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+					dptHeader.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					dptHeader.setBackgroundColor(BaseColor.GRAY);
+					pdfTable.addCell(dptHeader);
+
+					PdfPCell promoHeader = new PdfPCell(new Phrase("Promotion"));
+					promoHeader.setBorderColor(BaseColor.BLACK);
+					promoHeader.setPaddingLeft(10);
+					promoHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+					promoHeader.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					promoHeader.setBackgroundColor(BaseColor.GRAY);
+					pdfTable.addCell(promoHeader);
+
+					PdfPCell anneeHeader = new PdfPCell(new Phrase("Année"));
+					anneeHeader.setBorderColor(BaseColor.BLACK);
+					anneeHeader.setPaddingLeft(10);
+					anneeHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+					anneeHeader.setVerticalAlignment(Element.ALIGN_MIDDLE);
+					anneeHeader.setBackgroundColor(BaseColor.GRAY);
+					pdfTable.addCell(anneeHeader);
+
+					// ajouter les données de chaque stagiaire
+					for (Stagiaire stagiaire : tableStagiaire.getItems()) {
+						pdfTable.addCell(new PdfPCell(new Paragraph(stagiaire.getNom())));
+						pdfTable.addCell(new PdfPCell(new Paragraph(stagiaire.getPrenom())));
+						pdfTable.addCell(new PdfPCell(new Paragraph(stagiaire.getDepartement())));
+						pdfTable.addCell(new PdfPCell(new Paragraph(stagiaire.getPromotion())));
+						pdfTable.addCell(new PdfPCell(new Paragraph(stagiaire.getAnnee())));
+
+					}
+
+					document.add(pdfTable);
+					document.close();
+					writer.close();
+
+					Desktop.getDesktop().open(pdf);
+
+				} catch (IOException | DocumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+
 		Button btnRefresh = new Button("Rafraîchir");
 		btnRefresh.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				tableStagiaire.setItems(
-						FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
+				tableStagiaire
+						.setItems(FXCollections.observableArrayList(ListeStagiaires.listInitialisation().getListe()));
 			}
 		});
-
 		
+		hboxBoutonsSecondRow.getChildren().addAll(errorBox,btnPrint,btnRefresh);
+
 		this.add(hboxBoutons, 0, 0);
-		this.add(errorLabel, 0, 1);
-		this.add(btnRefresh,0 , 1);
-		TableauStagiaire.setHalignment(btnRefresh, HPos.RIGHT);
+		this.add(hboxBoutonsSecondRow, 0, 1);
+		TableauStagiaire.setHalignment(hboxBoutonsSecondRow, HPos.RIGHT);
 		TableauStagiaire.setHalignment(hboxRightButton, HPos.RIGHT);
 		hboxRightButton.setMaxWidth(300);
 

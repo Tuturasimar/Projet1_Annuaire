@@ -35,7 +35,7 @@ public class App extends Application {
 
 		root.setTop(hbLogo);
 		try {
-			Image image = new Image(new FileInputStream("logoASTAnnuaire.png"));
+			Image image = new Image(new FileInputStream("src/main/java/assets/logoASTAnnuaire.png"));
 			ImageView imageView = new ImageView(image);
 			imageView.setX(50);
 			imageView.setY(25);

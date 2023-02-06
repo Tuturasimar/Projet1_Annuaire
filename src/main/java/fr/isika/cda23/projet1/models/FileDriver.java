@@ -19,7 +19,7 @@ public class FileDriver {
 	 */
 	public static void readTextFile() {
 		// selection du fichier
-		File file = new File("STAGIAIRES.DON");
+		File file = new File("src/main/java/assets/STAGIAIRES.DON");
 
 		// ouvrir le fichier
 		try {
